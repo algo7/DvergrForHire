@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <radialGradient id="gold" cx="40%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#ffe79a"/>
+      <stop offset="0.55" stop-color="#e3a832"/>
+      <stop offset="1" stop-color="#a8711a"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#fffbe0" stop-opacity="1"/>
+      <stop offset="1" stop-color="#ffe066" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect x="4" y="4" width="248" height="248" rx="36" fill="#1c2230"/>
+  <circle cx="128" cy="128" r="104" fill="url(#gold)" stroke="#7d5212" stroke-width="6"/>
+  <circle cx="128" cy="128" r="86" fill="none" stroke="#b07a20" stroke-width="3" stroke-dasharray="3 7"/>
+  <!-- hood -->
+  <path d="M128 52 C 98 66 84 94 82 124 L 174 124 C 172 94 158 66 128 52 Z" fill="#5e3a0c"/>
+  <!-- circlet band and its light -->
+  <rect x="84" y="110" width="88" height="13" rx="5" fill="#3a2407"/>
+  <circle cx="128" cy="116" r="22" fill="url(#glow)"/>
+  <path d="M128 104 L 139 116 L 128 128 L 117 116 Z" fill="#fff6b8" stroke="#c99a2a" stroke-width="2"/>
+  <!-- eyes -->
+  <ellipse cx="111" cy="136" rx="5" ry="3.5" fill="#2a1804"/>
+  <ellipse cx="145" cy="136" rx="5" ry="3.5" fill="#2a1804"/>
+  <!-- beard -->
+  <path d="M90 142 C 94 178 114 200 128 210 C 142 200 162 178 166 142 C 150 150 106 150 90 142 Z" fill="#6e4510"/>
+  <path d="M110 152 C 112 172 118 188 124 198 M146 152 C 144 172 138 188 132 198 M128 154 L 128 204"
+        fill="none" stroke="#4a2d07" stroke-width="3" stroke-linecap="round"/>
+</svg>
