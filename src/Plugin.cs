@@ -19,6 +19,9 @@ namespace DvergrForHire
         /// <summary>Both hire hooks (hover text, E) are in: without them the prompt would do nothing, so no setup.</summary>
         private static bool s_hireHooks;
 
+        /// <summary>The building protection hook is in (hiring works without it).</summary>
+        private static bool s_buildingHook;
+
         private void Awake()
         {
             Log = Logger;
@@ -29,6 +32,7 @@ namespace DvergrForHire
             }
             var harmony = new Harmony(Guid);
             s_hireHooks = TryPatch(harmony, typeof(HirePatches), "hire prompt and E hooks");
+            s_buildingHook = TryPatch(harmony, typeof(BuildingPatches), "building protection hook");
             SceneManager.sceneLoaded += OnSceneLoaded;
             Log.LogInfo($"{Name} loaded (v{PluginVersion})");
         }
@@ -52,6 +56,7 @@ namespace DvergrForHire
                 }
                 if (DvergrSetup.Run(netScene, out var message)) Log.LogInfo(message);
                 else Log.LogWarning(message);
+                if (!s_buildingHook) Log.LogWarning("Hired Dvergr can damage buildings: the protection hook couldn't be installed (see above)");
             }
             catch (Exception e)
             {
