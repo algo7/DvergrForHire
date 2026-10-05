@@ -27,6 +27,9 @@ namespace DvergrForHire
 
         public const string Coins = "Coins";
 
+        /// <summary>Hidden ZDO key (bool) on a creature a hired Dvergr summoned (the support mage's mistiles).</summary>
+        public const string SummonKey = "DvergrForHire_HiredSummon";
+
         /// <summary>Played at the Dvergr when it's hired (networked).</summary>
         public const string HireSound = "sfx_coins_placed";
 

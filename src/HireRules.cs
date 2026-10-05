@@ -81,6 +81,16 @@ namespace DvergrForHire
             return EPress.Hire;
         }
 
+        /// <summary>
+        /// A creature created right after SpawnAbility.FindTarget is that ability's summon when it's created in the same frame
+        /// and is one of the ability's summon prefabs; it's marked when the summoner is hired.
+        /// </summary>
+        public static bool MarkSummon(bool summonerHired, bool sameFrame, bool isItsSummonPrefab) =>
+            summonerHired && sameFrame && isItsSummonPrefab;
+
+        /// <summary>Building pieces take no damage from a hired Dvergr or from what a hired Dvergr summoned (mistiles).</summary>
+        public static bool BuildingSafeFrom(bool hired, bool hiredSummon) => hired || hiredSummon;
+
         /// <summary>A hover line for E, styled like vanilla's (localized later: $KEY_Use becomes the key).</summary>
         public static string UseLine(string action) => "[<color=yellow><b>$KEY_Use</b></color>] " + action;
 

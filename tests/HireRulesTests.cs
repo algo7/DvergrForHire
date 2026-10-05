@@ -112,6 +112,23 @@ internal static partial class Tests
         Eq(HireRules.EPress.Recruiter, HireRules.WhatEDoes(true, false, true, false, false, false), "a recruiter: never vanilla follow / stay");
     }
 
+    private static void Test_Summons_MarkedOnlyFromAHiredMagesSpawn()
+    {
+        // User, 2026-10-05 ("track hired ones"): a support mage's mistile is its own creature, so its explosion isn't the
+        // mage's hit. Mistiles a hired mage summons get marked when they're created (same frame as SpawnAbility.FindTarget).
+        True(HireRules.MarkSummon(true, true, true), "a hired mage's summon, created in that frame, its prefab: marked");
+        False(HireRules.MarkSummon(false, true, true), "a wild mage's mistile: vanilla");
+        False(HireRules.MarkSummon(true, false, true), "a later frame: something else is being created");
+        False(HireRules.MarkSummon(true, true, false), "another creature created in that frame: not a summon");
+    }
+
+    private static void Test_Buildings_SafeFromHiresAndTheirSummons()
+    {
+        True(HireRules.BuildingSafeFrom(true, false), "a hired Dvergr's hit");
+        True(HireRules.BuildingSafeFrom(false, true), "a hired mage's mistile exploding");
+        False(HireRules.BuildingSafeFrom(false, false), "anything else: vanilla damage");
+    }
+
     private static void Test_Messages()
     {
         Eq("Not enough coins (1000)", HireRules.NotEnoughCoins(1000), "too few coins");

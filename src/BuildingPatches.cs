@@ -7,7 +7,8 @@ namespace DvergrForHire
     /// Hired Dvergr never damage building pieces or ships (WearNTear). Their fireball, cluster bomb and ice bolt explode in a
     /// 3 m blast that hits every piece in range (Projectile.DoAOE checks friend or enemy for creatures only), and stray bolts
     /// and melee swings hit pieces too. WearNTear.Damage runs where the hit is worked out: the game running the Dvergr and its
-    /// projectiles, which a modded game takes control of. Never throws (on error: vanilla damage).
+    /// projectiles, which a modded game takes control of. A hired support mage's mistiles are their own creatures; SummonPatches
+    /// marks them when they're created, so their explosions are dropped too. Never throws (on error: vanilla damage).
     /// </summary>
     [HarmonyPatch]
     internal static class BuildingPatches
@@ -20,7 +21,9 @@ namespace DvergrForHire
         {
             try
             {
-                return hit == null || !Mercenary.IsHired(hit.GetAttacker());
+                if (hit == null) return true;
+                var attacker = hit.GetAttacker();
+                return !HireRules.BuildingSafeFrom(Mercenary.IsHired(attacker), Mercenary.IsHiredSummon(attacker));
             }
             catch (Exception e)
             {

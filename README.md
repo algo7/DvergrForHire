@@ -48,7 +48,10 @@ hits them, so a hired Dvergr never attacks players either way.
 
 A mage's fireball, cluster bomb and ice bolt explode in a 3 m blast that damages every building piece in range
 (`Projectile.DoAOE` checks friend or enemy for creatures only); stray bolts and melee swings hit pieces too. A prefix on
-`WearNTear.Damage` drops hits whose attacker is a hired Dvergr. It runs where the hit is worked out: the game running
+`WearNTear.Damage` drops hits whose attacker is a hired Dvergr. A support mage's mistiles are their own creatures (summoned by
+`SpawnAbility`), so their explosions aren't the mage's hits: a prefix on `SpawnAbility.FindTarget` and a postfix on
+`Character.Awake` mark each mistile a hired Dvergr summons (`DvergrForHire_HiredSummon`), and marked attackers are dropped
+too. It runs where the hit is worked out: the game running
 the Dvergr and its projectiles.
 
 ### Hiring posts

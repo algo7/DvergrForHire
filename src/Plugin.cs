@@ -22,6 +22,9 @@ namespace DvergrForHire
         /// <summary>The building protection hook is in (hiring works without it).</summary>
         private static bool s_buildingHook;
 
+        /// <summary>The summon marker hooks are in (hired mages' mistiles can't damage buildings).</summary>
+        private static bool s_summonHook;
+
         /// <summary>Both hiring post hooks (placing, marking) are in.</summary>
         private static bool s_postHooks;
 
@@ -37,6 +40,7 @@ namespace DvergrForHire
             s_hireHooks = TryPatch(harmony, typeof(HirePatches), "hire prompt and E hooks");
             s_buildingHook = TryPatch(harmony, typeof(BuildingPatches), "building protection hook");
             s_postHooks = TryPatch(harmony, typeof(PostPatches), "hiring post hooks");
+            s_summonHook = TryPatch(harmony, typeof(SummonPatches), "summon marker hooks");
             SceneManager.sceneLoaded += OnSceneLoaded;
             Log.LogInfo($"{Name} loaded (v{PluginVersion})");
         }
@@ -68,6 +72,7 @@ namespace DvergrForHire
                 }
                 else if (hiring) Log.LogWarning("Hiring posts are off: the post hooks couldn't be installed (see above)");
                 if (!s_buildingHook) Log.LogWarning("Hired Dvergr can damage buildings: the protection hook couldn't be installed (see above)");
+                else if (!s_summonHook) Log.LogWarning("Hired mages' mistiles can damage buildings: the summon hooks couldn't be installed (see above)");
             }
             catch (Exception e)
             {

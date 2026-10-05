@@ -59,6 +59,16 @@ namespace DvergrForHire
             InvokeRepeating(nameof(Tick), UnityEngine.Random.Range(0.2f, TickSeconds), TickSeconds);
         }
 
+        private static readonly int s_summonHash = DvergrSettings.SummonKey.GetStableHashCode();
+
+        /// <summary>A creature a hired Dvergr summoned (SummonPatches), e.g. a hired support mage's mistile.</summary>
+        internal static bool IsHiredSummon(Character character)
+        {
+            if (character == null) return false;
+            var nview = character.GetComponent<ZNetView>();
+            return nview != null && nview.IsValid() && nview.GetZDO().GetBool(s_summonHash);
+        }
+
         /// <summary>A hired Dvergr (for the building protection).</summary>
         internal static bool IsHired(Character character) =>
             character != null && character.GetComponent<Mercenary>() != null && character.IsTamed();
