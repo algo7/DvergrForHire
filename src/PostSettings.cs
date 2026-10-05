@@ -45,6 +45,9 @@ namespace DvergrForHire
         /// <summary>Hidden ZDO key (a ZDOID) on a recruiter: its post's lantern pole.</summary>
         public const string RecruiterKey = "DvergrForHire_Recruiter";
 
+        /// <summary>Hidden ZDO key (a ZDOID) on a post's lantern pole: its recruiter (the post breaks when it's gone).</summary>
+        public const string PoleRecruiterKey = "DvergrForHire_PostRecruiter";
+
         /// <summary>Metres from the pole (towards the placing player) where the recruiter appears.</summary>
         public const float RecruiterOffset = 1.5f;
 

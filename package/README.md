@@ -38,8 +38,9 @@ recruiter who stays by it.
 - **Press E at the recruiter** to hire: a new Dvergr appears in front of you and follows you right away. Hire as many as
   you can pay for.
 - **Deep North Dvergr from a post follow you anywhere**, unlike the ones in Mørkhalla.
-- The recruiter guards the post. **If it dies, the post is done:** remove the pole (you get the pole's own materials
-  back) and build a new post. Remove a post and its recruiter leaves.
+- The recruiter guards the post, up to about 20 m around it, then walks back. **If it dies, the post breaks** and drops
+  the pole's materials: build a new post. Remove a post with the hammer and its recruiter leaves.
+- Hired Dvergr, recruiters included, never damage your buildings.
 - Friends without the mod see a Dvergr lantern pole with a Dvergr standing next to it.
 
 ## Features

@@ -67,6 +67,19 @@ internal static partial class Tests
         Eq(PostRules.RecruiterE.Nothing, PostRules.RecruiterInteract(true, true), "held Shift+E: nothing, like vanilla");
     }
 
+    private static void Test_Posts_PoleBreaksOnlyAfterTenSecondsWithoutItsRecruiter()
+    {
+        // User, 2026-10-05: "when the post devger died the post should be gone too"; it breaks like a destroyed piece.
+        var watch = new PostWatch();
+        False(PostRules.PoleBreaks(true, true, watch, 0), "recruiter there");
+        False(PostRules.PoleBreaks(true, false, watch, 1), "recruiter missing: start counting (its data may arrive late)");
+        False(PostRules.PoleBreaks(true, false, watch, 10.9), "missing 9.9 s");
+        True(PostRules.PoleBreaks(true, false, watch, 11.1), "missing 10.1 s: the post breaks");
+        var old = new PostWatch();
+        False(PostRules.PoleBreaks(false, false, old, 0), "a post placed before posts knew their recruiter");
+        False(PostRules.PoleBreaks(false, false, old, 100), "never breaks by itself");
+    }
+
     private static void Test_Posts_RecruiterLeavesOnlyAfterTenSeconds()
     {
         var watch = new PostWatch();

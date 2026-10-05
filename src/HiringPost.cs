@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace DvergrForHire
@@ -6,19 +7,51 @@ namespace DvergrForHire
     /// <summary>
     /// On the vanilla Dvergr lantern pole prefab, in games with the mod. Inert on ordinary poles (no hover text, E does
     /// nothing: vanilla). On a hiring post (its ZDO has DvergrForHire_Post): hover with the kind and this game's star choice,
-    /// E cycles the stars for this game's next hire there (local, not saved). Never throws.
+    /// E cycles the stars for this game's next hire there (local, not saved); every second, once its recruiter has been gone
+    /// for PostGoneSeconds (it died), the post breaks: vanilla WearNTear.Remove, handled by whichever game controls the pole
+    /// (with or without the mod), with the break effect and the pole's materials dropped. Never throws.
     /// </summary>
     public sealed class HiringPost : MonoBehaviour, Hoverable, Interactable
     {
         private static readonly int s_postHash = PostSettings.PostKey.GetStableHashCode();
+        private static readonly KeyValuePair<int, int> s_recruiterHash = ZDO.GetHashZDOID(PostSettings.PoleRecruiterKey);
         private static bool s_errorLogged;
 
         private ZNetView m_nview;
+        private readonly PostWatch m_recruiterWatch = new PostWatch();
+        private bool m_breakLogged;
 
         /// <summary>Stars for this game's next hire at this post (0..2).</summary>
         internal int Stars { get; private set; }
 
-        private void Awake() => m_nview = GetComponent<ZNetView>();
+        private void Awake()
+        {
+            m_nview = GetComponent<ZNetView>();
+            InvokeRepeating(nameof(Tick), UnityEngine.Random.Range(0.2f, 1f), 1f);
+        }
+
+        /// <summary>Break the post once its recruiter has been gone for PostGoneSeconds; retried every second until it's gone.</summary>
+        private void Tick()
+        {
+            try
+            {
+                var kind = Kind;
+                if (kind == null || ZDOMan.instance == null) return; // an ordinary lantern pole
+                var recruiter = m_nview.GetZDO().GetZDOID(s_recruiterHash);
+                var linked = !recruiter.IsNone();
+                var there = linked && ZDOMan.instance.GetZDO(recruiter) != null;
+                if (!PostRules.PoleBreaks(linked, there, m_recruiterWatch, Time.unscaledTimeAsDouble)) return;
+                var wearNTear = GetComponent<WearNTear>();
+                if (wearNTear != null) wearNTear.Remove(); // drops the pole's materials, like any destroyed piece
+                if (m_breakLogged) return;
+                m_breakLogged = true;
+                Plugin.Log.LogInfo($"A {kind.Label} recruiter died: its hiring post broke");
+            }
+            catch (Exception e)
+            {
+                LogOnce(e);
+            }
+        }
 
         /// <summary>This pole's post kind, or null for an ordinary lantern pole.</summary>
         internal PostKind Kind

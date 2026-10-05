@@ -28,6 +28,13 @@ namespace DvergrForHire
             RecruiterName(label) + "\n" + HireRules.UseLine("Hire: " + price.ToString(CultureInfo.InvariantCulture) + " coins")
             + HireRules.RenameLines(vanilla);
 
+        /// <summary>
+        /// A post's pole, on a game with the mod: true once its recruiter has been gone for PostGoneSeconds (it died), so the
+        /// post breaks. Poles placed before they knew their recruiter (not linked) never break by themselves.
+        /// </summary>
+        public static bool PoleBreaks(bool linked, bool recruiterExists, PostWatch watch, double nowSeconds) =>
+            linked && watch.ShouldLeave(recruiterExists, nowSeconds);
+
         public enum RecruiterE
         {
             /// <summary>Let vanilla handle it (Shift+E: rename).</summary>

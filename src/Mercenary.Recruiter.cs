@@ -11,6 +11,7 @@ namespace DvergrForHire
     public sealed partial class Mercenary
     {
         private static readonly KeyValuePair<int, int> s_recruiterHash = ZDO.GetHashZDOID(PostSettings.RecruiterKey);
+        private static readonly KeyValuePair<int, int> s_poleRecruiterHash = ZDO.GetHashZDOID(PostSettings.PoleRecruiterKey);
 
         private readonly PostWatch m_postWatch = new PostWatch();
 
@@ -42,7 +43,9 @@ namespace DvergrForHire
             var dir = toPlacer.sqrMagnitude > 0.01f ? toPlacer.normalized : pole.transform.forward;
             var pos = pole.transform.position + dir * PostSettings.RecruiterOffset + Vector3.up * 0.5f;
             var recruiter = Instantiate(prefab, pos, Quaternion.LookRotation(dir));
-            recruiter.GetComponent<ZNetView>().GetZDO().Set(s_recruiterHash, pole.GetZDO().m_uid);
+            var recruiterView = recruiter.GetComponent<ZNetView>();
+            recruiterView.GetZDO().Set(s_recruiterHash, pole.GetZDO().m_uid);
+            pole.GetZDO().Set(s_poleRecruiterHash, recruiterView.GetZDO().m_uid); // the post breaks when its recruiter is gone
             recruiter.GetComponent<Character>().SetTamed(true);
             recruiter.GetComponent<BaseAI>().SetPatrolPoint(); // stay here (vanilla "stay"; the patrol point is in the ZDO)
             Plugin.Log.LogInfo($"Hiring post ({kind.Label}) placed: its recruiter arrived");
