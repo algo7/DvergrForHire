@@ -138,5 +138,5 @@ where you left off.
 - Changes: the Changelog tab
 - Made with AI assistance.
 - Built with [BepInEx](https://github.com/BepInEx/BepInEx) and HarmonyX. MIT license.
-- Icon: [Dwarf face](https://game-icons.net/1x1/delapouite/dwarf-face.html) by Delapouite,
-  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), recoloured and put on a shield.
+- Icon based on [Dwarf face](https://game-icons.net/1x1/delapouite/dwarf-face.html) by Delapouite
+  ([CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)), changed into a hooded Dvergr and put on a shield.

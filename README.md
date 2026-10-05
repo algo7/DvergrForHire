@@ -125,5 +125,7 @@ thunderstore.toml          Thunderstore publishing settings (tcli)
 
 [MIT](LICENSE)
 
-The icon (`package/icon.svg`, `package/icon.png`) is [Dwarf face](https://game-icons.net/1x1/delapouite/dwarf-face.html)
-by Delapouite, [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), recoloured and placed on a wooden shield.
+The icon (`package/icon.svg`, `package/icon.png`) is based on
+[Dwarf face](https://game-icons.net/1x1/delapouite/dwarf-face.html) by Delapouite
+([CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)): the horned helmet became a Dvergr hood with a circlet gem,
+recoloured and placed on a wooden shield.
