@@ -12,8 +12,7 @@ everything other players see is vanilla: no new creatures, items or effects.
 >
 > - their missed shots, spells and the support mage's mistiles **can damage your buildings**,
 > - they don't follow you, and E does nothing,
-> - a hit from your friend angers the Dvergr nearby,
-> - Dvergr from a hiring post drop loot when they die.
+> - a hit from your friend angers the Dvergr nearby.
 >
 > And whoever controls them, a friend without the mod can always hurt your hired Dvergr with any weapon.
 
