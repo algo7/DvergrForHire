@@ -1,20 +1,21 @@
 # DvergrForHire
 
 Got a pile of coins and nothing to spend it on? Hire some muscle. Walk up to a peaceful Dvergr, pay, and it follows
-you as your mercenary: it fights for you, never turns on you, and leaves your base standing. Client-side, and
-everything other players see is vanilla: no new creatures, items or effects.
+you as your mercenary: it fights for you, never turns on you, and leaves your base standing. Nothing to install on the
+server, and everything other players see is vanilla: no new creatures, items or effects.
 
 > **⚠️ Warning: everyone on the server should have this mod, same version. We highly recommend it.**
 >
-> The mod's rules only run in the games of players who have it. When a friend *without* the mod is the one whose game
-> controls your hired Dvergr (nobody with the mod is nearby, or for up to half a minute after you first meet them), your
-> Dvergr **stay hired and friendly** (green health bar, they never attack you), but the mod's extras pause:
+> In multiplayer, Valheim lets one player's game control each creature, usually the game of whoever got there first.
+> The mod's rules only work while a game *with* the mod controls your hired Dvergr. If a friend's game without the mod
+> controls them (when nobody with the mod is nearby, and for up to half a minute after your game first meets that
+> friend), your Dvergr **stay hired and friendly** (green health bar, they never attack you), but the mod's extras pause:
 >
 > - their missed shots, spells and the support mage's mistiles **can damage your buildings**,
-> - they don't follow you, and E does nothing,
-> - a hit from your friend angers the Dvergr nearby.
+> - they don't follow you, and pressing E on them does nothing,
+> - if your friend hits one, the wild Dvergr nearby get angry.
 >
-> And no matter whose game controls them, a friend without the mod can always hurt your hired Dvergr with any weapon.
+> And even while your game controls them, a friend without the mod can always hurt your hired Dvergr with any weapon.
 
 ## Quick Start
 
@@ -28,7 +29,7 @@ everything other players see is vanilla: no new creatures, items or effects.
 |---|---|
 | Mistlands rogue or mage | 100 coins |
 | Ashlands | 200 coins |
-| Deep North (inside Mørkhalla) | 100 coins |
+| Deep North (in the Mørkhalla dungeon) | 100 coins |
 
 Starred Dvergr cost 50 coins more per star. You pay once: no wages, no food. A hired Dvergr is yours until it dies.
 
@@ -38,7 +39,8 @@ follow you out.
 ## Hiring Posts
 
 Rather hire at home? Build a **hiring post** (hammer, Furniture tab, next to a black forge): a Dvergr lantern pole with a
-recruiter who stays by it.
+recruiter who stays by it. A post costs the lantern pole's usual materials (3 copper, 1 Dvergr lantern, 1 chain) plus the
+extra materials below.
 
 | Post | Hire price | Extra materials |
 |---|---|---|
@@ -109,7 +111,7 @@ The first time, your game checks for up to half a minute that the friend really 
 hire while a friend's game controls it may stand still for that long before it follows you.
 
 Friends without the mod can hurt your hired Dvergr with any weapon, and if their game controls it at that moment, the
-hit angers the Dvergr nearby. Until your game takes control, a hired Dvergr can also still damage buildings. That's why
+hit angers the wild Dvergr nearby. Until your game takes control, a hired Dvergr can also still damage buildings. That's why
 we highly recommend that everyone on the server has the mod, same version (see the warning at the top).
 
 ## Compatibility
@@ -126,7 +128,7 @@ we highly recommend that everyone on the server has the mod, same version (see t
 
 Nothing in your characters needs the mod (the hiring posts they learned just drop out of the hammer). Hired Dvergr stay
 in your world, friendly and with their names, but they stop following and wander around where they are, so tell them to
-**stay** at home first. Without the mod any weapon can hurt them again, and hitting one angers the Dvergr nearby. Hiring
+**stay** at home first. Without the mod any weapon can hurt them again, and hitting one angers the wild Dvergr nearby. Hiring
 posts stay as Dvergr lantern poles, and their recruiters stay as friendly Dvergr guarding the spot. Reinstalling picks up
 where you left off.
 
