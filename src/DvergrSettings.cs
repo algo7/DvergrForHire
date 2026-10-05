@@ -7,16 +7,19 @@ namespace DvergrForHire
     /// <summary>Everything DvergrForHire sets or charges: decided by the user, not configurable, vanilla prefabs only.</summary>
     internal static class DvergrSettings
     {
-        /// <summary>The hireable Dvergr prefabs and their price with no stars. Not DvergerTest (dev-only).</summary>
+        /// <summary>
+        /// The hireable Dvergr prefabs and their price with no stars. Not DvergerTest (dev-only). DvergerDeepNorth only spawns
+        /// inside Mørkhalla, an interior dungeon a hired Dvergr can't follow you out of: priced as a one-dungeon helper.
+        /// </summary>
         public static readonly (string Prefab, int Price)[] Hireable =
         {
-            ("Dverger", 500),
-            ("DvergerMage", 500),
-            ("DvergerMageFire", 500),
-            ("DvergerMageIce", 500),
-            ("DvergerMageSupport", 500),
-            ("DvergerAshlands", 1000),
-            ("DvergerDeepNorth", 1500),
+            ("Dverger", 250),
+            ("DvergerMage", 250),
+            ("DvergerMageFire", 250),
+            ("DvergerMageIce", 250),
+            ("DvergerMageSupport", 250),
+            ("DvergerAshlands", 500),
+            ("DvergerDeepNorth", 250),
         };
 
         public const string Coins = "Coins";

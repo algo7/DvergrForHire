@@ -14,9 +14,9 @@ everything other players see is vanilla: no new creatures, items or effects.
 
 | Dvergr | Price |
 |---|---|
-| Mistlands rogue or mage | 500 coins |
-| Ashlands | 1000 coins |
-| Deep North | 1500 coins |
+| Mistlands rogue or mage | 250 coins |
+| Ashlands | 500 coins |
+| Deep North (inside Mørkhalla) | 250 coins |
 
 Starred Dvergr cost more: one star doubles the price, two stars triple it. You pay once: no wages, no food. A hired
 Dvergr is yours until it dies.
@@ -36,6 +36,8 @@ Dvergr is yours until it dies.
   in vanilla. Their camp is off the market until new Dvergr show up.
 - **Hiring a Dvergr away from its camp leaves its spot empty:** the camp gets no new Dvergr there while yours is alive.
 - **Your hired Dvergr get along with peaceful Dvergr.** If a camp gets angry, they fight it.
+- **Like any tamed animal, hired Dvergr don't follow you through dungeon doors or portals.** Deep North Dvergr only
+  live inside Mørkhalla, so hire them to help you clear that dungeon.
 - When a hired Dvergr dies, it drops its usual loot.
 
 ## Multiplayer
