@@ -48,6 +48,11 @@
       <HintPath>$(ManagedDir)/assembly_utils.dll</HintPath>
       <Private>false</Private>
     </Reference>
+    <!-- Localization (the hover text) -->
+    <Reference Include="assembly_guiutils">
+      <HintPath>$(ManagedDir)/assembly_guiutils.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
     <Reference Include="UnityEngine">
       <HintPath>$(ManagedDir)/UnityEngine.dll</HintPath>
       <Private>false</Private>
