@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using HarmonyLib;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ namespace DvergrForHire
     internal static class PostPatches
     {
         private static readonly int s_postHash = PostSettings.PostKey.GetStableHashCode();
+        private static readonly int s_fromPostHash = PostSettings.FromPostKey.GetStableHashCode();
         private static bool s_errorLogged;
 
         /// <summary>Set while our prefix places a pole for a stand-in.</summary>
@@ -72,6 +74,26 @@ namespace DvergrForHire
                 if (nview == null || !nview.IsValid()) return;
                 nview.GetZDO().Set(s_postHash, s_placing.m_kind);
                 s_placed = nview;
+            }
+            catch (Exception e)
+            {
+                LogOnce(e);
+            }
+        }
+
+        /// <summary>
+        /// Dvergr a post made (DvergrForHire_FromPost) drop no loot: both vanilla loot paths, the direct drop on death and the
+        /// ragdoll's saved loot list, build it here, in the game that handles the death.
+        /// </summary>
+        [HarmonyPatch(typeof(CharacterDrop), nameof(CharacterDrop.GenerateDropList))]
+        [HarmonyPostfix]
+        private static void GenerateDropList(CharacterDrop __instance, ref List<KeyValuePair<GameObject, int>> __result)
+        {
+            try
+            {
+                var nview = __instance.GetComponent<ZNetView>();
+                if (nview == null || !nview.IsValid()) return;
+                if (!PostRules.DropsLoot(nview.GetZDO().GetBool(s_fromPostHash))) __result = new List<KeyValuePair<GameObject, int>>();
             }
             catch (Exception e)
             {

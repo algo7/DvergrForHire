@@ -31,6 +31,9 @@ namespace DvergrForHire
             return (camp * (100 + PostSettings.PremiumPercent) + 50) / 100;
         }
 
+        /// <summary>Dvergr a post made drop no loot (posts can't turn coins into loot); every other Dvergr keeps vanilla loot.</summary>
+        public static bool DropsLoot(bool madeByPost) => !madeByPost;
+
         /// <summary>E on a post: none → ★ → ★★ → none; anything out of range goes back to none.</summary>
         public static int NextStars(int stars) => stars < 0 || stars >= MaxStars ? 0 : stars + 1;
 

@@ -14,6 +14,7 @@ namespace DvergrForHire
     {
         private static readonly int s_recruiterHash = PostSettings.RecruiterKey.GetStableHashCode();
         private static readonly int s_poleHash = PostSettings.Pole.GetStableHashCode();
+        private static readonly int s_fromPostHash = PostSettings.FromPostKey.GetStableHashCode();
         private static readonly List<ZDO> s_nearby = new List<ZDO>();
 
         private readonly PostWatch m_postWatch = new PostWatch();
@@ -49,6 +50,7 @@ namespace DvergrForHire
             var recruiter = Instantiate(prefab, pos, Quaternion.LookRotation(dir));
             var recruiterView = recruiter.GetComponent<ZNetView>();
             recruiterView.GetZDO().Set(s_recruiterHash, true);
+            recruiterView.GetZDO().Set(s_fromPostHash, true); // no loot (PostPatches.GenerateDropList)
             // The vanilla spawner link: kept across world loads (ZDOMan.ConnectSpawners), sent to every game with the pole.
             pole.GetZDO().SetConnection(ZDOExtraData.ConnectionType.Spawned, recruiterView.GetZDO().m_uid);
             recruiter.GetComponent<Character>().SetTamed(true);
@@ -111,6 +113,7 @@ namespace DvergrForHire
             var pos = HireSpot(player);
             var toPlayer = Vector3.ProjectOnPlane(player.transform.position - pos, Vector3.up);
             var hire = Instantiate(prefab, pos, toPlayer.sqrMagnitude > 0.01f ? Quaternion.LookRotation(toPlayer) : Quaternion.identity);
+            hire.GetComponent<ZNetView>().GetZDO().Set(s_fromPostHash, true); // no loot (PostPatches.GenerateDropList)
             var hired = hire.GetComponent<Mercenary>();
             if (hired != null) hired.m_hiredAt = Time.unscaledTimeAsDouble; // a double press doesn't toggle the new hire to stay
             var character = hire.GetComponent<Character>();

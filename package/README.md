@@ -66,7 +66,8 @@ Hiring at home costs 20% more than at a camp.
 - **Your hired Dvergr get along with peaceful Dvergr.** If a camp gets angry, they fight it.
 - **Like any tamed animal, hired Dvergr don't follow you through dungeon doors or portals.** So a Deep North Dvergr
   hired in Mørkhalla stays there when you leave: hire it to help you clear that dungeon.
-- When a hired Dvergr dies, it drops its usual loot.
+- When a Dvergr you hired at a camp dies, it drops its usual loot. Dvergr from a hiring post (recruiters and hires)
+  drop nothing, so posts can't be farmed for loot.
 
 ## Multiplayer
 

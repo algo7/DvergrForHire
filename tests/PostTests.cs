@@ -90,6 +90,15 @@ internal static partial class Tests
         Eq(PendingFollow.Step.Wait, follow.Decide("", Me, 0, true, 3), "once");
     }
 
+    private static void Test_Posts_PostMadeDvergrDropNothing()
+    {
+        // User, 2026-10-05: Dvergr made by a post (recruiters and hires) drop no loot when they die, so posts can't turn coins
+        // into gemstones or trophies (a butchered 2★ Deep North would give ~1.6 ancient gemstones for 600 coins).
+        False(PostRules.DropsLoot(true), "made by a post: no loot");
+        True(PostRules.DropsLoot(false), "camp Dvergr, hired or not: vanilla loot");
+        Eq("DvergrForHire_FromPost", PostSettings.FromPostKey, "the hidden marker on post-made Dvergr");
+    }
+
     private static void Test_Posts_PoleBreaksOnlyAfterTenSecondsWithoutItsRecruiter()
     {
         // User, 2026-10-05: "when the post devger died the post should be gone too"; it breaks like a destroyed piece.

@@ -48,6 +48,9 @@ namespace DvergrForHire
         /// </summary>
         public const string RecruiterKey = "DvergrForHire_Recruiter";
 
+        /// <summary>Hidden ZDO key (bool) on every Dvergr a post made (its recruiter, every hire): they drop no loot.</summary>
+        public const string FromPostKey = "DvergrForHire_FromPost";
+
         /// <summary>Hiring at a post costs this much more than the same Dvergr at a camp, in percent (user: "20% premium on post hire").</summary>
         public const int PremiumPercent = 20;
 
