@@ -8,7 +8,7 @@ everything other players see is vanilla: no new creatures, items or effects.
 >
 > The mod's rules only run in the games of players who have it. When a friend *without* the mod is the one whose game
 > controls your hired Dvergr (nobody with the mod is nearby, or for up to half a minute after you first meet them), your
-> Dvergr act like the game's own:
+> Dvergr **stay hired and friendly** (green health bar, they never attack you), but the mod's extras pause:
 >
 > - their missed shots, spells and the support mage's mistiles **can damage your buildings**,
 > - they don't follow you, and E does nothing,
