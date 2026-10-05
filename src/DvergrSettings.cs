@@ -13,13 +13,13 @@ namespace DvergrForHire
         /// </summary>
         public static readonly (string Prefab, int Price)[] Hireable =
         {
-            ("Dverger", 250),
-            ("DvergerMage", 250),
-            ("DvergerMageFire", 250),
-            ("DvergerMageIce", 250),
-            ("DvergerMageSupport", 250),
-            ("DvergerAshlands", 500),
-            ("DvergerDeepNorth", 250),
+            ("Dverger", 100),
+            ("DvergerMage", 100),
+            ("DvergerMageFire", 100),
+            ("DvergerMageIce", 100),
+            ("DvergerMageSupport", 100),
+            ("DvergerAshlands", 200),
+            ("DvergerDeepNorth", 100),
         };
 
         public const string Coins = "Coins";

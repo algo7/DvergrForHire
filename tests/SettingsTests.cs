@@ -26,12 +26,13 @@ internal static partial class Tests
 
     private static void Test_Settings_PricesFromTheUser()
     {
-        // User, 2026-10-05: "lower the cost a bit": 250 / 500 / 250. Deep North Dvergr only spawn inside Mørkhalla (an
-        // interior dungeon they can't follow you out of), so they're a one-dungeon helper, priced like Mistlands.
+        // User, 2026-10-05, after two in-game tests: 100 / 200 / 100 (first 500 / 1000 / 1500, then 250 / 500 / 250: "still
+        // too expensive"). Deep North Dvergr only spawn inside Mørkhalla (an interior dungeon they can't follow you out of),
+        // so they're a one-dungeon helper, priced like Mistlands.
         foreach (var mistlands in new[] { "Dverger", "DvergerMage", "DvergerMageFire", "DvergerMageIce", "DvergerMageSupport" })
-            Eq(250, DvergrSettings.BasePrice(mistlands), mistlands);
-        Eq(500, DvergrSettings.BasePrice("DvergerAshlands"), "Ashlands");
-        Eq(250, DvergrSettings.BasePrice("DvergerDeepNorth"), "Deep North (Mørkhalla only)");
+            Eq(100, DvergrSettings.BasePrice(mistlands), mistlands);
+        Eq(200, DvergrSettings.BasePrice("DvergerAshlands"), "Ashlands");
+        Eq(100, DvergrSettings.BasePrice("DvergerDeepNorth"), "Deep North (Mørkhalla only)");
         Eq(0, DvergrSettings.BasePrice("DvergerTest"), "the dev-only Dvergr isn't for hire");
         Eq(7, DvergrSettings.Hireable.Length, "seven kinds");
     }
