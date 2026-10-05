@@ -48,6 +48,9 @@ namespace DvergrForHire
         /// </summary>
         public const string RecruiterKey = "DvergrForHire_Recruiter";
 
+        /// <summary>Hiring at a post costs this much more than the same Dvergr at a camp, in percent (user: "20% premium on post hire").</summary>
+        public const int PremiumPercent = 20;
+
         /// <summary>Metres from the pole (towards the placing player) where the recruiter appears.</summary>
         public const float RecruiterOffset = 1.5f;
 

@@ -6,4 +6,4 @@
   cost more). Hired Dvergr follow, stay and can be renamed like tamed animals, fight for you, never attack players and
   don't damage buildings.
 - Hiring posts: build one per kind of Dvergr (a Dvergr lantern pole with a recruiter) and hire at home, Deep North
-  included (400 coins; starred ones cost more).
+  included (480 coins; posts cost 20% more than camps).

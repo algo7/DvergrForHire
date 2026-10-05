@@ -30,11 +30,13 @@ recruiter who stays by it.
 
 | Post | Hire price | Extra materials |
 |---|---|---|
-| Rogue, fire mage, ice mage, support mage | 100 coins | 10 yggdrasil wood, 5 black marble |
-| Ashlands | 200 coins | 10 ashwood, 5 grausten |
-| Deep North | 400 coins | 10 frostwood, 5 norn thread |
+| Rogue, fire mage, ice mage, support mage | 120 coins | 10 yggdrasil wood, 5 black marble |
+| Ashlands | 240 coins | 10 ashwood, 5 grausten |
+| Deep North | 480 coins | 10 frostwood, 5 norn thread |
 
-- **Look at the post and press E** to pick the stars for your next hire (each star adds 50 coins).
+Hiring at home costs 20% more than at a camp.
+
+- **Look at the post and press E** to pick the stars for your next hire (each star adds 60 coins at a post).
 - **Press E at the recruiter** to hire: a new Dvergr appears in front of you and follows you right away. Hire as many as
   you can pay for.
 - **Deep North Dvergr from a post follow you around the world**, unlike the ones stuck in Mørkhalla (but not through

@@ -29,9 +29,13 @@ internal static partial class Tests
 
     private static void Test_Posts_PriceWithStars()
     {
-        Eq(100, HireRules.Price(PostSettings.ById("rogue").Price, 1), "rogue, no stars");
-        Eq(150, HireRules.Price(PostSettings.ById("firemage").Price, 2), "fire mage, 1 star");
-        Eq(500, HireRules.Price(PostSettings.ById("deepnorth").Price, 3), "Deep North, 2 stars: 400 + 100");
+        // User, 2026-10-05: "add a 20% premium on post hire": the whole price (base + 50 per star) × 1.2.
+        Eq(120, PostRules.PostPrice(PostSettings.ById("rogue").Price, 1), "rogue, no stars: 100 × 1.2");
+        Eq(180, PostRules.PostPrice(PostSettings.ById("firemage").Price, 2), "fire mage, 1 star: 150 × 1.2");
+        Eq(360, PostRules.PostPrice(PostSettings.ById("ashlands").Price, 3), "Ashlands, 2 stars: 300 × 1.2");
+        Eq(600, PostRules.PostPrice(PostSettings.ById("deepnorth").Price, 3), "Deep North, 2 stars: 500 × 1.2");
+        Eq(0, PostRules.PostPrice(0, 3), "no base price stays not for hire");
+        Eq(20, PostSettings.PremiumPercent, "the premium");
     }
 
     private static void Test_Posts_StarsCycle()

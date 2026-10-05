@@ -60,7 +60,7 @@ namespace DvergrForHire
         {
             var kind = Kind;
             if (kind == null) return vanilla;
-            var price = HireRules.Price(kind.Price, PostStars + 1);
+            var price = PostRules.PostPrice(kind.Price, PostStars + 1);
             return Localization.instance.Localize(PostRules.RecruiterHover(kind.Label, price, vanilla));
         }
 
@@ -90,7 +90,7 @@ namespace DvergrForHire
             var prefab = ZNetScene.instance != null ? ZNetScene.instance.GetPrefab(kind.Prefab) : null;
             if (prefab == null) return false;
             var stars = PostStars;
-            var price = HireRules.Price(kind.Price, stars + 1);
+            var price = PostRules.PostPrice(kind.Price, stars + 1);
             var inventory = player.GetInventory();
             var coins = inventory.CountItems(s_coinName);
             switch (HireRules.Check(!m_character.IsDead(), false, false, coins, price))
