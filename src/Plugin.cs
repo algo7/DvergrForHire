@@ -22,6 +22,9 @@ namespace DvergrForHire
         /// <summary>The building protection hook is in (hiring works without it).</summary>
         private static bool s_buildingHook;
 
+        /// <summary>Both hiring post hooks (placing, marking) are in.</summary>
+        private static bool s_postHooks;
+
         private void Awake()
         {
             Log = Logger;
@@ -33,6 +36,7 @@ namespace DvergrForHire
             var harmony = new Harmony(Guid);
             s_hireHooks = TryPatch(harmony, typeof(HirePatches), "hire prompt and E hooks");
             s_buildingHook = TryPatch(harmony, typeof(BuildingPatches), "building protection hook");
+            s_postHooks = TryPatch(harmony, typeof(PostPatches), "hiring post hooks");
             SceneManager.sceneLoaded += OnSceneLoaded;
             Log.LogInfo($"{Name} loaded (v{PluginVersion})");
         }
@@ -54,8 +58,15 @@ namespace DvergrForHire
                     Log.LogWarning("Hiring is off: the hire prompt / E hooks couldn't be installed (see above)");
                     return;
                 }
-                if (DvergrSetup.Run(netScene, out var message)) Log.LogInfo(message);
+                var hiring = DvergrSetup.Run(netScene, out var message);
+                if (hiring) Log.LogInfo(message);
                 else Log.LogWarning(message);
+                if (hiring && s_postHooks)
+                {
+                    if (PostSetup.Run(netScene, out var posts)) Log.LogInfo(posts);
+                    else Log.LogWarning(posts);
+                }
+                else if (hiring) Log.LogWarning("Hiring posts are off: the post hooks couldn't be installed (see above)");
                 if (!s_buildingHook) Log.LogWarning("Hired Dvergr can damage buildings: the protection hook couldn't be installed (see above)");
             }
             catch (Exception e)

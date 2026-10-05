@@ -11,7 +11,7 @@ namespace DvergrForHire
     /// from a game without the mod (TakeoverWatch), re-send a lost "follow me" (PendingFollow, hiring game only) and, on the
     /// game running it, stamp the heartbeat and copy the name into the vanilla override-name field. Never throws.
     /// </summary>
-    public sealed class Mercenary : MonoBehaviour
+    public sealed partial class Mercenary : MonoBehaviour
     {
         private const float TickSeconds = 1f;
 

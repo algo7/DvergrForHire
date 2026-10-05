@@ -1,0 +1,83 @@
+using System;
+using HarmonyLib;
+using UnityEngine;
+
+namespace DvergrForHire
+{
+    /// <summary>
+    /// Placing a hiring post: Player.PlacePiece gets a stand-in (the hammer entry) and places the vanilla lantern pole
+    /// instead; Piece.SetCreator, called by PlacePiece on the new pole, marks it as a post; then the placer's game creates the
+    /// recruiter. The cost comes off the stand-in (Player.UpdatePlacement uses the selected piece). Never throws.
+    /// </summary>
+    [HarmonyPatch]
+    internal static class PostPatches
+    {
+        private static readonly int s_postHash = PostSettings.PostKey.GetStableHashCode();
+        private static bool s_errorLogged;
+
+        /// <summary>Set while our prefix places a pole for a stand-in.</summary>
+        private static PostStandIn s_placing;
+
+        /// <summary>The pole SetCreator marked during that call.</summary>
+        private static ZNetView s_placed;
+
+        [HarmonyPatch(typeof(Player), nameof(Player.PlacePiece))]
+        [HarmonyPrefix]
+        private static bool PlacePiece(Player __instance, Piece piece, Vector3 pos, Quaternion rot, bool doAttack, bool cheated)
+        {
+            PostStandIn standIn;
+            try
+            {
+                standIn = piece != null ? piece.GetComponent<PostStandIn>() : null;
+                if (standIn == null || PostSetup.s_pole == null) return true; // any other piece: vanilla
+            }
+            catch (Exception e)
+            {
+                LogOnce(e);
+                return true;
+            }
+            try
+            {
+                s_placing = standIn;
+                s_placed = null;
+                __instance.PlacePiece(PostSetup.s_pole, pos, rot, doAttack, cheated); // the vanilla pole (this prefix lets it through)
+                if (s_placed != null) Mercenary.CreateRecruiter(s_placed, standIn.m_kind, __instance.transform.position);
+            }
+            catch (Exception e)
+            {
+                LogOnce(e);
+            }
+            finally
+            {
+                s_placing = null;
+                s_placed = null;
+            }
+            return false;
+        }
+
+        [HarmonyPatch(typeof(Piece), nameof(Piece.SetCreator))]
+        [HarmonyPostfix]
+        private static void SetCreator(Piece __instance)
+        {
+            try
+            {
+                if (s_placing == null) return;
+                var nview = __instance.GetComponent<ZNetView>();
+                if (nview == null || !nview.IsValid()) return;
+                nview.GetZDO().Set(s_postHash, s_placing.m_kind);
+                s_placed = nview;
+            }
+            catch (Exception e)
+            {
+                LogOnce(e);
+            }
+        }
+
+        private static void LogOnce(Exception e)
+        {
+            if (s_errorLogged) return;
+            s_errorLogged = true;
+            Plugin.Log.LogError($"Placing a hiring post failed (logged once): {e}");
+        }
+    }
+}
