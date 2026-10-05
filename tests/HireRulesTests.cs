@@ -2,17 +2,25 @@ using DvergrForHire;
 
 internal static partial class Tests
 {
-    private static void Test_Price_StarsMultiply()
+    private static void Test_Price_FiftyPerStar()
     {
-        Eq(500, HireRules.Price(500, 1), "no stars");
-        Eq(1000, HireRules.Price(500, 2), "1 star: twice");
-        Eq(4500, HireRules.Price(1500, 3), "Deep North, 2 stars: three times");
+        // User, 2026-10-05: "for star cost just plus 50 for each star" (level 1 = no stars).
+        Eq(100, HireRules.Price(100, 1), "no stars");
+        Eq(150, HireRules.Price(100, 2), "1 star: +50");
+        Eq(200, HireRules.Price(100, 3), "2 stars: +100");
+        Eq(300, HireRules.Price(200, 3), "Ashlands, 2 stars");
     }
 
     private static void Test_Price_LevelBelowOneCountsAsOne()
     {
-        Eq(500, HireRules.Price(500, 0), "level 0: never free");
-        Eq(500, HireRules.Price(500, -3), "negative level: never free");
+        Eq(100, HireRules.Price(100, 0), "level 0: no stars, never free");
+        Eq(100, HireRules.Price(100, -3), "negative level: no stars, never free");
+    }
+
+    private static void Test_Price_NoBasePriceStaysNotForHire()
+    {
+        Eq(0, HireRules.Price(0, 3), "not a hireable kind: stars don't give it a price");
+        Eq(HireRules.Hire.NotHireable, HireRules.Check(true, false, false, 9999, HireRules.Price(0, 3)), "so it can't be hired");
     }
 
     private static void Test_Hire_WildAndPeacefulWithCoins()

@@ -18,7 +18,7 @@ everything other players see is vanilla: no new creatures, items or effects.
 | Ashlands | 200 coins |
 | Deep North (inside Mørkhalla) | 100 coins |
 
-Starred Dvergr cost more: one star doubles the price, two stars triple it. You pay once: no wages, no food. A hired
+Starred Dvergr cost 50 coins more per star. You pay once: no wages, no food. A hired
 Dvergr is yours until it dies.
 
 ## Features

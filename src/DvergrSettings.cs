@@ -22,6 +22,9 @@ namespace DvergrForHire
             ("DvergerDeepNorth", 100),
         };
 
+        /// <summary>Coins each star adds to the price (user: "plus 50 for each star").</summary>
+        public const int StarPrice = 50;
+
         public const string Coins = "Coins";
 
         /// <summary>Played at the Dvergr when it's hired (networked).</summary>
