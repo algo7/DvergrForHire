@@ -156,13 +156,14 @@ namespace DvergrForHire
                 if (!hired || ZNet.instance == null) return;
                 TakeOver(); // first, so nothing below can leave a hired Dvergr with a game without the mod
                 FollowUp();
+                var postFound = IsRecruiter && FindPost(); // every game: keeps the pole cached for the hover and E
 
                 if (!m_nview.IsOwner())
                 {
                     m_postWatch.Reset();
                     return;
                 }
-                if (IsRecruiter && RecruiterLeaves()) return;
+                if (IsRecruiter && RecruiterLeaves(postFound)) return;
                 var zdo = m_nview.GetZDO();
                 var now = ZNet.instance.GetTime().Ticks;
                 if (Takeover.ShouldBeat(zdo.GetLong(s_beatHash), now)) zdo.Set(s_beatHash, now);

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace DvergrForHire
@@ -14,7 +13,6 @@ namespace DvergrForHire
     public sealed class HiringPost : MonoBehaviour, Hoverable, Interactable
     {
         private static readonly int s_postHash = PostSettings.PostKey.GetStableHashCode();
-        private static readonly KeyValuePair<int, int> s_recruiterHash = ZDO.GetHashZDOID(PostSettings.PoleRecruiterKey);
         private static bool s_errorLogged;
 
         private ZNetView m_nview;
@@ -36,11 +34,14 @@ namespace DvergrForHire
             try
             {
                 var kind = Kind;
-                if (kind == null || ZDOMan.instance == null) return; // an ordinary lantern pole
-                var recruiter = m_nview.GetZDO().GetZDOID(s_recruiterHash);
-                var linked = !recruiter.IsNone();
-                var there = linked && ZDOMan.instance.GetZDO(recruiter) != null;
-                if (!PostRules.PoleBreaks(linked, there, m_recruiterWatch, Time.unscaledTimeAsDouble)) return;
+                if (kind == null || ZDOMan.instance == null || ZNetScene.instance == null) return; // an ordinary lantern pole
+                var zdo = m_nview.GetZDO();
+                // Linked by the vanilla spawner connection; after a world load a dead recruiter leaves it "Spawned, no target".
+                if (zdo.GetConnectionType() != ZDOExtraData.ConnectionType.Spawned) return;
+                var recruiter = zdo.GetConnectionZDOID(ZDOExtraData.ConnectionType.Spawned);
+                var found = !recruiter.IsNone() && ZDOMan.instance.GetZDO(recruiter) != null;
+                var areaReady = found || ZNetScene.instance.IsAreaReady(transform.position);
+                if (!PostRules.PoleBreaks(true, found, areaReady, m_recruiterWatch, Time.unscaledTimeAsDouble)) return;
                 var wearNTear = GetComponent<WearNTear>();
                 if (wearNTear != null) wearNTear.Remove(); // drops the pole's materials, like any destroyed piece
                 if (m_breakLogged) return;

@@ -71,35 +71,58 @@ internal static partial class Tests
     {
         // User, 2026-10-05: "when the post devger died the post should be gone too"; it breaks like a destroyed piece.
         var watch = new PostWatch();
-        False(PostRules.PoleBreaks(true, true, watch, 0), "recruiter there");
-        False(PostRules.PoleBreaks(true, false, watch, 1), "recruiter missing: start counting (its data may arrive late)");
-        False(PostRules.PoleBreaks(true, false, watch, 10.9), "missing 9.9 s");
-        True(PostRules.PoleBreaks(true, false, watch, 11.1), "missing 10.1 s: the post breaks");
+        False(PostRules.PoleBreaks(true, true, true, watch, 0), "recruiter there");
+        False(PostRules.PoleBreaks(true, false, true, watch, 1), "recruiter missing: start counting (its data may arrive late)");
+        False(PostRules.PoleBreaks(true, false, true, watch, 10.9), "missing 9.9 s");
+        True(PostRules.PoleBreaks(true, false, true, watch, 11.1), "missing 10.1 s: the post breaks");
         var old = new PostWatch();
-        False(PostRules.PoleBreaks(false, false, old, 0), "a post placed before posts knew their recruiter");
-        False(PostRules.PoleBreaks(false, false, old, 100), "never breaks by itself");
+        False(PostRules.PoleBreaks(false, false, true, old, 0), "a post placed before posts linked their recruiter");
+        False(PostRules.PoleBreaks(false, false, true, old, 100), "never breaks by itself");
     }
 
     private static void Test_Posts_RecruiterLeavesOnlyAfterTenSeconds()
     {
         var watch = new PostWatch();
-        False(watch.ShouldLeave(true, 0), "post there");
-        False(watch.ShouldLeave(false, 1), "missing: start counting (its data may arrive late)");
-        False(watch.ShouldLeave(false, 10.9), "missing 9.9 s");
-        True(watch.ShouldLeave(false, 11.1), "missing 10.1 s: leave");
+        False(watch.ShouldLeave(true, true, 0), "post there");
+        False(watch.ShouldLeave(false, true, 1), "missing: start counting (its data may arrive late)");
+        False(watch.ShouldLeave(false, true, 10.9), "missing 9.9 s");
+        True(watch.ShouldLeave(false, true, 11.1), "missing 10.1 s: leave");
 
         var back = new PostWatch();
-        False(back.ShouldLeave(false, 0), "missing");
-        False(back.ShouldLeave(true, 5), "it arrived");
-        False(back.ShouldLeave(false, 6), "missing again: counted from 6");
-        False(back.ShouldLeave(false, 15.9), "9.9 s");
-        True(back.ShouldLeave(false, 16.1), "10.1 s");
+        False(back.ShouldLeave(false, true, 0), "missing");
+        False(back.ShouldLeave(true, true, 5), "it arrived");
+        False(back.ShouldLeave(false, true, 6), "missing again: counted from 6");
+        False(back.ShouldLeave(false, true, 15.9), "9.9 s");
+        True(back.ShouldLeave(false, true, 16.1), "10.1 s");
 
         var reset = new PostWatch();
-        False(reset.ShouldLeave(false, 0), "missing");
+        False(reset.ShouldLeave(false, true, 0), "missing");
         reset.Reset(); // another game runs the recruiter for a while
-        False(reset.ShouldLeave(false, 9), "counted again from 9");
-        False(reset.ShouldLeave(false, 18.9), "9.9 s");
-        True(reset.ShouldLeave(false, 19.1), "10.1 s");
+        False(reset.ShouldLeave(false, true, 9), "counted again from 9");
+        False(reset.ShouldLeave(false, true, 18.9), "9.9 s");
+        True(reset.ShouldLeave(false, true, 19.1), "10.1 s");
+    }
+
+    private static void Test_Posts_NotLoadedHereIsNotMissing()
+    {
+        // Reviewer: at the edge of what this game has loaded, the partner may simply not be loaded here. Only an area this
+        // game has fully loaded (vanilla ZNetScene.IsAreaReady) can say "gone".
+        var watch = new PostWatch();
+        for (var t = 0; t <= 100; t += 5)
+            False(watch.ShouldLeave(false, false, t), $"area not loaded here, t={t}: never counts");
+        False(watch.ShouldLeave(false, true, 101), "area loaded: start counting now");
+        False(watch.ShouldLeave(false, false, 105), "area unloaded again: the count starts over");
+        False(watch.ShouldLeave(false, true, 106), "loaded: counted from 106");
+        True(watch.ShouldLeave(false, true, 116.1), "10.1 s missing in a loaded area: gone");
+        False(PostRules.PoleBreaks(true, false, false, new PostWatch(), 0), "the pole side too");
+    }
+
+    private static void Test_Posts_FindsThePoleLinkedToARecruiter()
+    {
+        // The pole links its recruiter with a vanilla "Spawned" connection (kept across saves); the recruiter finds its pole
+        // among nearby objects as the pole whose connection points at it.
+        var poles = new[] { (Id: 1, Target: 7), (Id: 2, Target: 9), (Id: 3, Target: 0) };
+        Eq(2, PostRules.PostOf(poles, p => p.Target, 9).Id, "the pole that points at recruiter 9");
+        Eq(0, PostRules.PostOf(poles, p => p.Target, 5).Id, "none points at 5: default");
     }
 }

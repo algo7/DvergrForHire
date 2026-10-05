@@ -57,11 +57,14 @@ Six hammer entries are local copies of the vanilla Dvergr lantern pole (kept in 
 world objects) with their own name and cost: the pole's own cost plus materials from the Dvergr's home biome. A prefix on
 `Player.PlacePiece` places the real vanilla pole instead of the copy, and a postfix on `Piece.SetCreator` marks it with a
 hidden key (`DvergrForHire_Post`, the kind). The placing game then creates the recruiter: the vanilla Dvergr of that
-kind, tamed, told to stay (its patrol point), with a hidden key pointing at its pole (`DvergrForHire_Recruiter`). A
-`HiringPost` component on the vanilla pole prefab gives marked poles a hover text and E (the stars for the next hire,
-kept locally); unmarked poles stay vanilla. E on a recruiter pays and creates a new Dvergr of its kind in front of the
-player, tamed and following; the game running a recruiter removes it 10 s after its pole is gone. Players without the mod
-see a vanilla lantern pole and a tamed Dvergr.
+kind, tamed, told to stay (its patrol point), marked with a hidden key (`DvergrForHire_Recruiter`). The pole links its
+recruiter with a vanilla "Spawned" connection, the way a creature spawner links its creature: object ids change on every
+world load, and the game re-links connections on load (`ZDOMan.ConnectSpawners`). The recruiter finds its pole by
+scanning the zones around it. A `HiringPost` component on the vanilla pole prefab gives marked poles a hover text and E
+(the stars for the next hire, kept locally); unmarked poles stay vanilla. E on a recruiter pays and creates a new Dvergr
+of its kind in front of the player, tamed and following. A recruiter whose pole is gone, or a pole whose recruiter died,
+is removed (the pole breaks with vanilla `WearNTear.Remove`) after 10 s, counted only while the game has the whole area
+loaded (`ZNetScene.IsAreaReady`). Players without the mod see a vanilla lantern pole and a tamed Dvergr.
 
 ### Who runs a Dvergr
 

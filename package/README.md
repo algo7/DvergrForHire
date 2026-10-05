@@ -37,7 +37,8 @@ recruiter who stays by it.
 - **Look at the post and press E** to pick the stars for your next hire (each star adds 50 coins).
 - **Press E at the recruiter** to hire: a new Dvergr appears in front of you and follows you right away. Hire as many as
   you can pay for.
-- **Deep North Dvergr from a post follow you anywhere**, unlike the ones in Mørkhalla.
+- **Deep North Dvergr from a post follow you around the world**, unlike the ones stuck in Mørkhalla (but not through
+  portals or dungeon doors, like any tamed animal).
 - The recruiter guards the post, up to about 20 m around it, then walks back. **If it dies, the post breaks** and drops
   the pole's materials: build a new post. Remove a post with the hammer and its recruiter disappears with it.
 - Hired Dvergr, recruiters included, never damage your buildings.
@@ -86,14 +87,16 @@ everyone in your group has the mod, same version.
   in `BepInEx/LogOutput.log`.
 - Mods that change the hover text or E of tamed animals might clash. If Dvergr act strangely next to another mod, please
   open an issue.
-- The few texts the mod adds (the price, "Hired", "Not enough coins") are in English; everything else is the game's own.
+- The few texts the mod adds (the price, "Hired", "Not enough coins", the hiring post texts) are in English; everything
+  else is the game's own.
 
 ## Uninstalling
 
-Nothing is stored in your characters. Hired Dvergr stay in your world, friendly and with their names, but they stop
-following and wander around where they are, so tell them to **stay** at home first. Without the mod any weapon can hurt them
-again, and hitting one angers the Dvergr nearby. Hiring posts stay as Dvergr lantern poles, and their recruiters stay as
-friendly Dvergr guarding the spot. Reinstalling picks up where you left off.
+Nothing in your characters needs the mod (the hiring posts they learned just drop out of the hammer). Hired Dvergr stay
+in your world, friendly and with their names, but they stop following and wander around where they are, so tell them to
+**stay** at home first. Without the mod any weapon can hurt them again, and hitting one angers the Dvergr nearby. Hiring
+posts stay as Dvergr lantern poles, and their recruiters stay as friendly Dvergr guarding the spot. Reinstalling picks up
+where you left off.
 
 ## Links
 

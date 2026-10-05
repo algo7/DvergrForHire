@@ -1,23 +1,27 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace DvergrForHire
 {
     /// <summary>
-    /// Recruiter mode (hiring posts): a hired Dvergr linked to its post's lantern pole by DvergrForHire_Recruiter. It always
+    /// Recruiter mode (hiring posts): a hired Dvergr marked DvergrForHire_Recruiter, linked from its post's lantern pole by a
+    /// vanilla "Spawned" connection (kept across world loads; the pole is found by scanning nearby objects). It always
     /// stays (no follow / stay toggle); E hires a new Dvergr of its kind in front of the player with the stars picked at its
     /// post; Shift+E is vanilla rename; on the game running it, it leaves once its post has been gone for PostGoneSeconds.
     /// </summary>
     public sealed partial class Mercenary
     {
-        private static readonly KeyValuePair<int, int> s_recruiterHash = ZDO.GetHashZDOID(PostSettings.RecruiterKey);
-        private static readonly KeyValuePair<int, int> s_poleRecruiterHash = ZDO.GetHashZDOID(PostSettings.PoleRecruiterKey);
+        private static readonly int s_recruiterHash = PostSettings.RecruiterKey.GetStableHashCode();
+        private static readonly int s_poleHash = PostSettings.Pole.GetStableHashCode();
+        private static readonly List<ZDO> s_nearby = new List<ZDO>();
 
         private readonly PostWatch m_postWatch = new PostWatch();
 
-        private ZDOID PostId => m_nview.GetZDO().GetZDOID(s_recruiterHash);
+        /// <summary>This session's id of the recruiter's pole (ids change on every world load, so it's never saved).</summary>
+        private ZDOID m_postId = ZDOID.None;
 
-        private bool IsRecruiter => !PostId.IsNone();
+        private bool IsRecruiter => m_nview.GetZDO().GetBool(s_recruiterHash);
 
         private PostKind Kind => PostSettings.ByPrefab(Utils.GetPrefabName(gameObject));
 
@@ -26,7 +30,7 @@ namespace DvergrForHire
         {
             get
             {
-                var post = ZNetScene.instance != null ? ZNetScene.instance.FindInstance(PostId) : null;
+                var post = ZNetScene.instance != null && !m_postId.IsNone() ? ZNetScene.instance.FindInstance(m_postId) : null;
                 var hiring = post != null ? post.GetComponent<HiringPost>() : null;
                 return hiring != null ? hiring.Stars : 0;
             }
@@ -44,8 +48,9 @@ namespace DvergrForHire
             var pos = pole.transform.position + dir * PostSettings.RecruiterOffset + Vector3.up * 0.5f;
             var recruiter = Instantiate(prefab, pos, Quaternion.LookRotation(dir));
             var recruiterView = recruiter.GetComponent<ZNetView>();
-            recruiterView.GetZDO().Set(s_recruiterHash, pole.GetZDO().m_uid);
-            pole.GetZDO().Set(s_poleRecruiterHash, recruiterView.GetZDO().m_uid); // the post breaks when its recruiter is gone
+            recruiterView.GetZDO().Set(s_recruiterHash, true);
+            // The vanilla spawner link: kept across world loads (ZDOMan.ConnectSpawners), sent to every game with the pole.
+            pole.GetZDO().SetConnection(ZDOExtraData.ConnectionType.Spawned, recruiterView.GetZDO().m_uid);
             recruiter.GetComponent<Character>().SetTamed(true);
             recruiter.GetComponent<BaseAI>().SetPatrolPoint(); // stay here (vanilla "stay"; the patrol point is in the ZDO)
             Plugin.Log.LogInfo($"Hiring post ({kind.Label}) placed: its recruiter arrived");
@@ -106,6 +111,8 @@ namespace DvergrForHire
             var forward = player.transform.forward;
             var pos = player.transform.position + forward * PostSettings.HireOffset + Vector3.up * 0.5f;
             var hire = Instantiate(prefab, pos, Quaternion.LookRotation(-forward));
+            var hired = hire.GetComponent<Mercenary>();
+            if (hired != null) hired.m_hiredAt = Time.unscaledTimeAsDouble; // a double press doesn't toggle the new hire to stay
             var character = hire.GetComponent<Character>();
             var tameable = hire.GetComponent<Tameable>();
             character.SetLevel(stars + 1);
@@ -117,11 +124,31 @@ namespace DvergrForHire
             return true;
         }
 
-        /// <summary>On the game running the recruiter: true (and it's removed) once its post has been gone for PostGoneSeconds.</summary>
-        private bool RecruiterLeaves()
+        /// <summary>
+        /// Every game: whether this recruiter's pole is there. Checks the cached pole first; only when that misses, scans the
+        /// 3x3 zones around the recruiter (it never strays more than ~20 m from its post) for the pole linked to it.
+        /// </summary>
+        private bool FindPost()
         {
-            var postThere = ZDOMan.instance != null && ZDOMan.instance.GetZDO(PostId) != null;
-            if (!m_postWatch.ShouldLeave(postThere, Time.unscaledTimeAsDouble)) return false;
+            if (ZDOMan.instance == null) return false;
+            var me = m_nview.GetZDO().m_uid;
+            var cached = m_postId.IsNone() ? null : ZDOMan.instance.GetZDO(m_postId);
+            if (cached != null && cached.GetConnectionZDOID(ZDOExtraData.ConnectionType.Spawned) == me) return true;
+            s_nearby.Clear();
+            ZDOMan.instance.FindSectorObjects(ZoneSystem.GetZone(transform.position), new SimulationDistance(1, 0), s_nearby);
+            var post = PostRules.PostOf(s_nearby.Where(z => z.GetPrefab() == s_poleHash), z => z.GetConnectionZDOID(ZDOExtraData.ConnectionType.Spawned), me);
+            m_postId = post != null ? post.m_uid : ZDOID.None;
+            return post != null;
+        }
+
+        /// <summary>
+        /// On the game running the recruiter: true (and it's removed) once its post has been gone for PostGoneSeconds in an area
+        /// this game has fully loaded.
+        /// </summary>
+        private bool RecruiterLeaves(bool postFound)
+        {
+            var areaReady = postFound || (ZNetScene.instance != null && ZNetScene.instance.IsAreaReady(transform.position));
+            if (!m_postWatch.ShouldLeave(postFound, areaReady, Time.unscaledTimeAsDouble)) return false;
             Plugin.Log.LogInfo("A hiring post is gone: its recruiter left");
             m_nview.Destroy();
             return true;

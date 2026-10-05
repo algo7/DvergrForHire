@@ -42,11 +42,11 @@ namespace DvergrForHire
         /// <summary>Hidden ZDO key on a post's lantern pole: its kind id.</summary>
         public const string PostKey = "DvergrForHire_Post";
 
-        /// <summary>Hidden ZDO key (a ZDOID) on a recruiter: its post's lantern pole.</summary>
+        /// <summary>
+        /// Hidden ZDO key (bool) on a recruiter. Its pole links it with a vanilla "Spawned" connection, the way a creature spawner
+        /// links its creature: ZDO ids change on every world load, and the game re-links connections on load (ZDOMan.ConnectSpawners).
+        /// </summary>
         public const string RecruiterKey = "DvergrForHire_Recruiter";
-
-        /// <summary>Hidden ZDO key (a ZDOID) on a post's lantern pole: its recruiter (the post breaks when it's gone).</summary>
-        public const string PoleRecruiterKey = "DvergrForHire_PostRecruiter";
 
         /// <summary>Metres from the pole (towards the placing player) where the recruiter appears.</summary>
         public const float RecruiterOffset = 1.5f;
