@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
-  <!-- DvergrForHire icon: original line drawing of a sword and a coin with a dollar sign, glowing Dvergr-lantern orange
-       (#ff9b30), on the round wooden shield of the author's LoadoutBuffs and SealsAtHome icons. Rendered to icon.png with
-       cairosvg (1024 px, then LANCZOS down to 256). -->
+  <!-- DvergrForHire icon: original line drawing of a hiring contract (a scroll with a coin seal showing a dollar sign) and a
+       Dvergr mage's staff, glowing Dvergr-lantern orange (#ff9b30), on the round wooden shield of the author's LoadoutBuffs
+       and SealsAtHome icons. Rendered to icon.png with cairosvg (1024 px, then LANCZOS down to 256). -->
   <defs>
     <clipPath id="wood"><circle cx="128" cy="128" r="96"/></clipPath>
     <radialGradient id="shade" cx="0.5" cy="0.5" r="0.5">
@@ -16,21 +16,31 @@
     <path d="M 48 20 V 236 M 72 20 V 236 M 96 20 V 236 M 120 20 V 236 M 144 20 V 236 M 168 20 V 236 M 192 20 V 236 M 216 20 V 236"/>
   </g>
   <circle cx="128" cy="128" r="96" fill="url(#shade)"/>
-  <g transform="translate(140 130) rotate(35)" fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <g id="sword">
-      <path d="M -13 34 V -54 L 0 -74 L 13 -54 V 34"/>
-      <path d="M -32 36 H 32 M 0 40 V 62"/>
-      <circle cx="0" cy="72" r="8"/></g>
-    <use href="#sword" stroke="#ff9b30" stroke-width="26" stroke-opacity="0.12"/>
-    <use href="#sword" stroke="#ff9b30" stroke-width="18" stroke-opacity="0.22"/>
-    <use href="#sword" stroke="#ff9b30" stroke-width="9"/>
+  <g transform="translate(80 134) rotate(0)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    
+    <g id="staff">
+      <path d="M 0.0 -25.9 V 60.5"/>
+      <path d="M 0.0 -60.5 L 10.1 -44.6 L 0.0 -28.8 L -10.1 -44.6 Z"/>
+      <path d="M -4.3 -24.5 C -18.7 -31.7 -20.2 -50.4 -11.5 -61.9 M 4.3 -24.5 C 18.7 -31.7 20.2 -50.4 11.5 -61.9"/></g>
+    <use href="#staff" stroke="#ff9b30" stroke-width="26" stroke-opacity="0.12"/>
+    <use href="#staff" stroke="#ff9b30" stroke-width="18" stroke-opacity="0.22"/>
+    <use href="#staff" stroke="#ff9b30" stroke-width="9"/>
   </g>
-  <g transform="translate(84 94)" fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <g id="coin">
-      <circle r="24"/>
-      <path d="M 9 -9 C 5 -14 -10 -14 -10 -5 C -10 4 10 -1 10 8 C 10 16 -6 16 -10 10 M 0 -19 V 19"/></g>
-    <use href="#coin" stroke="#ff9b30" stroke-width="23" stroke-opacity="0.12"/>
-    <use href="#coin" stroke="#ff9b30" stroke-width="16" stroke-opacity="0.22"/>
-    <use href="#coin" stroke="#ff9b30" stroke-width="8"/>
+  <g transform="translate(150 126)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    
+    <g id="scroll">
+      <path d="M -31.2 -51.5 H 34.3 C 42.1 -51.5 42.1 -39.0 34.3 -39.0 H 28.1 V 54.6 H -37.4 C -45.2 54.6 -45.2 42.1 -37.4 42.1 H -31.2 Z"/>
+      <path d="M -31.2 -39.0 H 28.1"/>
+      <path d="M -18.7 -20.3 H 15.6 M -18.7 -1.6 H 15.6 M -18.7 17.2 H 0.0"/></g>
+    <use href="#scroll" stroke="#ff9b30" stroke-width="26" stroke-opacity="0.12"/>
+    <use href="#scroll" stroke="#ff9b30" stroke-width="18" stroke-opacity="0.22"/>
+    <use href="#scroll" stroke="#ff9b30" stroke-width="9"/>
+  </g>
+  <g transform="translate(174 170)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <circle r="32" fill="#6a482c" stroke="none"/>
+    <g id="coin"><circle r="22"/><path d="M 9 -9 C 5 -14 -10 -14 -10 -5 C -10 4 10 -1 10 8 C 10 16 -6 16 -10 10 M 0 -19 V 19"/></g>
+    <use href="#coin" stroke="#ff9b30" stroke-width="20" stroke-opacity="0.12"/>
+    <use href="#coin" stroke="#ff9b30" stroke-width="14" stroke-opacity="0.22"/>
+    <use href="#coin" stroke="#ff9b30" stroke-width="7"/>
   </g>
 </svg>
