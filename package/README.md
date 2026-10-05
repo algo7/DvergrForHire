@@ -69,6 +69,23 @@ Hiring at home costs 20% more than at a camp.
 - When a Dvergr you hired at a camp dies, it drops its usual loot. Dvergr from a hiring post (recruiters and hires)
   drop nothing, so posts can't be farmed for loot.
 
+## Why It Works This Way
+
+- **Pay once, no wages.** A hire is yours until it dies, just like a tamed animal. Nothing to feed, nothing to keep
+  paying.
+- **Cheap enough to lose.** Dvergr hit hard but don't last forever, so a hire costs about the coins a dozen Dvergr drop.
+  Ashlands Dvergr are much tougher, so they cost more. Stars make a Dvergr a lot stronger (more health, more
+  damage), so each star adds to the price.
+- **Deep North Dvergr in Mørkhalla are cheap** because they can't leave their dungeon: they're helpers for that one
+  place. One from a hiring post follows you everywhere, so it costs the most.
+- **Hiring posts cost 20% more than camps.** You're paying for not walking to a camp; camps stay the cheap option.
+- **The post is the game's own Dvergr lantern pole, not a new model.** Friends without the mod only see things the game
+  already has: a custom model would be invisible to them, and they'd walk right through it. With the lantern pole,
+  everyone sees the same post. Build whatever hut you like around it.
+- **Dvergr from a post drop no loot,** so posts can't turn coins into gemstones or trophies.
+- **No settings file.** Prices are the same for everyone with the mod, so friends never see different prices for the same
+  Dvergr.
+
 ## Multiplayer
 
 DvergrForHire uses the game's own Dvergr instead of adding new mod-only ones, so friends without the mod still see your
