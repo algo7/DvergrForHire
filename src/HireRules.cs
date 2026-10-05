@@ -55,6 +55,32 @@ namespace DvergrForHire
             return now - lastSent >= DvergrSettings.TamedResendSeconds ? Paid.Resend : Paid.Waiting;
         }
 
+        public enum EPress
+        {
+            /// <summary>Pay and hire.</summary>
+            Hire,
+            /// <summary>Nothing happens (E is used up, vanilla doesn't run).</summary>
+            Nothing,
+            /// <summary>Vanilla Tameable.Interact: follow / stay, Shift+E rename.</summary>
+            Vanilla,
+            /// <summary>A post's recruiter: its own E (PostRules.RecruiterInteract).</summary>
+            Recruiter,
+        }
+
+        /// <summary>
+        /// What E does on a Dvergr (the E patch), decided in this order: a recruiter has its own E; right after this game hired
+        /// it, nothing (a double press doesn't make it stay); a hired Dvergr gets vanilla follow / stay / rename; while paid but
+        /// the tamed flag isn't back, or for a held E or Shift+E, nothing (never pays twice, no rename on a wild one); else hire.
+        /// </summary>
+        public static EPress WhatEDoes(bool recruiter, bool recentlyHired, bool tamed, bool paid, bool hold, bool alt)
+        {
+            if (recruiter) return EPress.Recruiter;
+            if (recentlyHired) return EPress.Nothing;
+            if (tamed) return EPress.Vanilla;
+            if (paid || hold || alt) return EPress.Nothing;
+            return EPress.Hire;
+        }
+
         /// <summary>A hover line for E, styled like vanilla's (localized later: $KEY_Use becomes the key).</summary>
         public static string UseLine(string action) => "[<color=yellow><b>$KEY_Use</b></color>] " + action;
 

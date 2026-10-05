@@ -82,15 +82,18 @@ namespace DvergrForHire
         internal bool? Interact(Humanoid user, bool hold, bool alt)
         {
             if (!Ready) return null;
-            if (IsRecruiter) return RecruiterInteract(user, hold, alt); // never follow / stay
-            if (RecentlyHired) return false;        // a double press right after hiring doesn't toggle the new hire to "stay"
-            if (m_character.IsTamed())
+            switch (HireRules.WhatEDoes(IsRecruiter, RecentlyHired, m_character.IsTamed(), m_paid, hold, alt))
             {
-                m_pending = null; // this player's own follow / stay wins over a late re-send of "follow me"
-                return null;      // hired: vanilla
+                case HireRules.EPress.Recruiter:
+                    return RecruiterInteract(user, hold, alt); // never follow / stay
+                case HireRules.EPress.Nothing:
+                    return false;
+                case HireRules.EPress.Vanilla:
+                    m_pending = null; // this player's own follow / stay wins over a late re-send of "follow me"
+                    return null;
+                default:
+                    return TryHire(user);
             }
-            if (m_paid || hold || alt) return false; // paid, tamed flag not back yet: never pay twice
-            return TryHire(user);
         }
 
         /// <summary>On the game of the player pressing E. True when E did something (hired, or the coin message).</summary>

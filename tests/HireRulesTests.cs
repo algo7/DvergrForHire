@@ -95,6 +95,23 @@ internal static partial class Tests
         False(HireRules.Hungry(false, false), "vanilla says fed: unchanged");
     }
 
+    private static void Test_E_WhatItDoesOnADvergr()
+    {
+        // The E patch on a Dvergr, decided in this order: recruiter mode; a double press right after hiring; vanilla follow /
+        // stay / rename on hired Dvergr; nothing while paid, held or with Shift; else hire.
+        Eq(HireRules.EPress.Hire, HireRules.WhatEDoes(false, false, false, false, false, false), "wild: E hires");
+        Eq(HireRules.EPress.Nothing, HireRules.WhatEDoes(false, false, false, false, true, false), "wild, held E: nothing (vanilla repeats it every frame)");
+        Eq(HireRules.EPress.Nothing, HireRules.WhatEDoes(false, false, false, false, false, true), "wild, Shift+E: nothing (no rename on a wild Dvergr)");
+        Eq(HireRules.EPress.Nothing, HireRules.WhatEDoes(false, false, false, true, false, false), "paid, tamed flag not back yet: never pays twice");
+        Eq(HireRules.EPress.Nothing, HireRules.WhatEDoes(false, true, false, true, false, false), "just hired, flag not back: nothing");
+        Eq(HireRules.EPress.Nothing, HireRules.WhatEDoes(false, true, true, false, false, false), "just hired: a double press doesn't make it stay");
+        Eq(HireRules.EPress.Vanilla, HireRules.WhatEDoes(false, false, true, false, false, false), "hired: vanilla follow / stay");
+        Eq(HireRules.EPress.Vanilla, HireRules.WhatEDoes(false, false, true, false, false, true), "hired, Shift+E: vanilla rename");
+        Eq(HireRules.EPress.Vanilla, HireRules.WhatEDoes(false, false, true, true, false, false), "hired, flag seen before 'paid' is cleared: vanilla");
+        Eq(HireRules.EPress.Recruiter, HireRules.WhatEDoes(true, true, true, true, true, true), "a recruiter: its own E, whatever else");
+        Eq(HireRules.EPress.Recruiter, HireRules.WhatEDoes(true, false, true, false, false, false), "a recruiter: never vanilla follow / stay");
+    }
+
     private static void Test_Messages()
     {
         Eq("Not enough coins (1000)", HireRules.NotEnoughCoins(1000), "too few coins");
