@@ -14,7 +14,7 @@ everything other players see is vanilla: no new creatures, items or effects.
 > - they don't follow you, and E does nothing,
 > - a hit from your friend angers the Dvergr nearby.
 >
-> And whoever controls them, a friend without the mod can always hurt your hired Dvergr with any weapon.
+> And no matter whose game controls them, a friend without the mod can always hurt your hired Dvergr with any weapon.
 
 ## Quick Start
 
@@ -103,10 +103,10 @@ Hiring at home costs 20% more than at a camp.
 DvergrForHire uses the game's own Dvergr instead of adding new mod-only ones, so friends without the mod still see your
 mercenaries (green health bar, their names), and uninstalling the mod keeps them.
 
-Valheim lets one player's game control each creature at a time, usually whoever got there first. If that's a friend
-without the mod, your game takes your hired Dvergr near you under its control, so following and staying work. The first
-time, your game checks for up to half a minute that the friend really doesn't have the mod, so a Dvergr you hire while a
-friend's game controls it may stand still for that long before it follows you.
+Valheim lets one player's game control each creature at a time, usually the game of whoever got there first. If that's
+a friend without the mod, your game takes your hired Dvergr near you under its control, so following and staying work.
+The first time, your game checks for up to half a minute that the friend really doesn't have the mod, so a Dvergr you
+hire while a friend's game controls it may stand still for that long before it follows you.
 
 Friends without the mod can hurt your hired Dvergr with any weapon, and if their game controls it at that moment, the
 hit angers the Dvergr nearby. Until your game takes control, a hired Dvergr can also still damage buildings. That's why
