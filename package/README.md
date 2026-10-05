@@ -18,9 +18,10 @@ everything other players see is vanilla: no new creatures, items or effects.
 | Ashlands | 200 coins |
 | Deep North (inside Mørkhalla) | 100 coins |
 
-Starred Dvergr cost 50 coins more per star. Deep North Dvergr only live inside the Mørkhalla dungeon, and one you
-hire there **stays in the dungeon**: it won't follow you out. You pay once: no wages, no food. A hired
-Dvergr is yours until it dies.
+Starred Dvergr cost 50 coins more per star. You pay once: no wages, no food. A hired Dvergr is yours until it dies.
+
+Deep North Dvergr only live inside the Mørkhalla dungeon, and one you hire there **stays in the dungeon**: it won't
+follow you out.
 
 ## Features
 
