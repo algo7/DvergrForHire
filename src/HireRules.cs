@@ -70,6 +70,13 @@ namespace DvergrForHire
             return name + "\n" + UseLine("Hire: " + price.ToString(CultureInfo.InvariantCulture) + " coins");
         }
 
+        /// <summary>
+        /// Tameable.IsHungry for a Dvergr: hired ones are never hungry. BaseAI.UpdateRegeneration only heals a tamed creature
+        /// with a Tameable when it isn't hungry, and hired Dvergr never eat, so they'd never regain health (wild Dvergr do).
+        /// Wild ones keep vanilla's answer, so vanilla taming still never starts.
+        /// </summary>
+        public static bool Hungry(bool vanillaHungry, bool hired) => vanillaHungry && !hired;
+
         public static string NotEnoughCoins(int price) => "Not enough coins (" + price.ToString(CultureInfo.InvariantCulture) + ")";
 
         public static string Hired(string name) => name + " hired";

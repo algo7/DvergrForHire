@@ -78,6 +78,15 @@ internal static partial class Tests
         Eq("Dvergr rogue ( Hired )\n" + KeyUse + "Follow / Stay", HireRules.Hover("Dvergr rogue", true, true, 500, null), "hired wins over provoked; no vanilla text");
     }
 
+    private static void Test_Hired_NeverHungrySoTheyHeal()
+    {
+        // BaseAI.UpdateRegeneration only heals a tamed creature with a Tameable when it isn't hungry, and hired Dvergr
+        // never eat: counted as hungry they'd never regain health (wild Dvergr do).
+        False(HireRules.Hungry(true, true), "hired: never hungry, so it regenerates like a wild Dvergr");
+        True(HireRules.Hungry(true, false), "wild: vanilla's answer (taming never starts: it needs not hungry)");
+        False(HireRules.Hungry(false, false), "vanilla says fed: unchanged");
+    }
+
     private static void Test_Messages()
     {
         Eq("Not enough coins (1000)", HireRules.NotEnoughCoins(1000), "too few coins");
