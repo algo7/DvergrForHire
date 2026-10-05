@@ -39,7 +39,7 @@ recruiter who stays by it.
   you can pay for.
 - **Deep North Dvergr from a post follow you anywhere**, unlike the ones in Mørkhalla.
 - The recruiter guards the post, up to about 20 m around it, then walks back. **If it dies, the post breaks** and drops
-  the pole's materials: build a new post. Remove a post with the hammer and its recruiter leaves.
+  the pole's materials: build a new post. Remove a post with the hammer and its recruiter disappears with it.
 - Hired Dvergr, recruiters included, never damage your buildings.
 - Friends without the mod see a Dvergr lantern pole with a Dvergr standing next to it.
 
