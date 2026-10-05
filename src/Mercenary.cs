@@ -73,6 +73,7 @@ namespace DvergrForHire
         internal string HoverText(string vanilla)
         {
             if (!Ready) return vanilla;
+            if (IsRecruiter) return RecruiterHoverText(vanilla);
             var hired = m_character.IsTamed() || m_paid;
             return Localization.instance.Localize(HireRules.Hover(m_tameable.GetName(), hired, m_ai.IsAggravated(), Price, vanilla));
         }
@@ -81,6 +82,7 @@ namespace DvergrForHire
         internal bool? Interact(Humanoid user, bool hold, bool alt)
         {
             if (!Ready) return null;
+            if (IsRecruiter) return RecruiterInteract(user, hold, alt); // never follow / stay
             if (RecentlyHired) return false;        // a double press right after hiring doesn't toggle the new hire to "stay"
             if (m_character.IsTamed()) return null; // hired: vanilla
             if (m_paid || hold || alt) return false; // paid, tamed flag not back yet: never pay twice
@@ -155,7 +157,12 @@ namespace DvergrForHire
                 TakeOver(); // first, so nothing below can leave a hired Dvergr with a game without the mod
                 FollowUp();
 
-                if (!m_nview.IsOwner()) return;
+                if (!m_nview.IsOwner())
+                {
+                    m_postWatch.Reset();
+                    return;
+                }
+                if (IsRecruiter && RecruiterLeaves()) return;
                 var zdo = m_nview.GetZDO();
                 var now = ZNet.instance.GetTime().Ticks;
                 if (Takeover.ShouldBeat(zdo.GetLong(s_beatHash), now)) zdo.Set(s_beatHash, now);
