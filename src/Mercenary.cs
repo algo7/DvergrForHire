@@ -7,7 +7,9 @@ namespace DvergrForHire
     /// <summary>
     /// On every hireable Dvergr (added to the prefabs by DvergrSetup). The hover text and E (called by HirePatches), the hire
     /// itself on the hiring player's game, and every second on every game: the provokable flag (hired: off, so players with
-    /// the mod can't hurt it and hitting it provokes nobody; wild: on, like vanilla). Never throws.
+    /// the mod can't hurt it and hitting it provokes nobody; wild: on, like vanilla). For hired Dvergr also: take control
+    /// from a game without the mod (TakeoverWatch), re-send a lost "follow me" (PendingFollow, hiring game only) and, on the
+    /// game running it, stamp the heartbeat and copy the name into the vanilla override-name field. Never throws.
     /// </summary>
     public sealed class Mercenary : MonoBehaviour
     {
@@ -22,6 +24,12 @@ namespace DvergrForHire
         /// <summary>The coin sound played when a Dvergr is hired (DvergrSetup).</summary>
         internal static EffectList s_hireEffect;
 
+        private static readonly int s_beatHash = DvergrSettings.BeatKey.GetStableHashCode();
+
+        /// <summary>Players this game found without the mod: peer id (new on every connection) → real time found.</summary>
+        private static readonly Dictionary<long, double> s_noMod = new Dictionary<long, double>();
+
+        private static readonly HashSet<long> s_logged = new HashSet<long>();
         private static readonly HashSet<string> s_errorsLogged = new HashSet<string>();
 
         private ZNetView m_nview;
@@ -29,6 +37,7 @@ namespace DvergrForHire
         private BaseAI m_ai;
         private Tameable m_tameable;
         private bool? m_hiredApplied;
+        private readonly TakeoverWatch m_watch = new TakeoverWatch();
 
         /// <summary>Real time this game hired it (0 = never).</summary>
         private double m_hiredAt;
@@ -37,6 +46,9 @@ namespace DvergrForHire
         private bool m_paid;
 
         private double m_tamedSentAt;
+
+        /// <summary>Only on the hiring player's game, until it follows them (or 2 minutes).</summary>
+        private PendingFollow m_pending;
 
         private void Awake()
         {
@@ -105,6 +117,7 @@ namespace DvergrForHire
             s_hireEffect?.Create(transform.position, transform.rotation);
             player.Message(MessageHud.MessageType.Center, HireRules.Hired(m_tameable.GetName()));
             m_tameable.Command(player, message: false); // follow the hirer at once
+            m_pending = new PendingFollow(player.GetPlayerName(), m_nview.GetZDO().GetOwner(), m_hiredAt);
             Plugin.Log.LogInfo($"Hired {Utils.GetPrefabName(gameObject)} (level {m_character.GetLevel()}) for {price} coins");
             return true;
         }
@@ -133,15 +146,74 @@ namespace DvergrForHire
                 if (!Ready) return;
                 var hired = m_character.IsTamed();
                 if (m_paid) ConfirmPayment(hired);
-                if (m_hiredApplied == hired) return;
-                m_ai.m_aggravatable = !hired;
-                m_hiredApplied = hired;
+                if (m_hiredApplied != hired)
+                {
+                    m_ai.m_aggravatable = !hired;
+                    m_hiredApplied = hired;
+                }
+                if (!hired || ZNet.instance == null) return;
+                TakeOver(); // first, so nothing below can leave a hired Dvergr with a game without the mod
+                FollowUp();
+
+                if (!m_nview.IsOwner()) return;
+                var zdo = m_nview.GetZDO();
+                var now = ZNet.instance.GetTime().Ticks;
+                if (Takeover.ShouldBeat(zdo.GetLong(s_beatHash), now)) zdo.Set(s_beatHash, now);
+                var tamedName = zdo.GetString(ZDOVars.s_tamedName);
+                if (NameCopy.ShouldWrite(tamedName, zdo.GetString(ZDOVars.s_overrideHoverName)))
+                    zdo.Set(ZDOVars.s_overrideHoverName, NameCopy.Target(tamedName));
             }
             catch (Exception e)
             {
                 if (s_errorsLogged.Add(e.GetType().FullName))
                     Plugin.Log.LogError($"Mercenary failed (each kind of error logged once): {e}");
             }
+        }
+
+        /// <summary>A game without the mod runs this hired Dvergr: run it here instead.</summary>
+        private void TakeOver()
+        {
+            var zdo = m_nview.GetZDO();
+            var owner = zdo.GetOwner();
+            var step = m_watch.Decide(m_nview.IsOwner(), owner, zdo.GetLong(s_beatHash), Time.unscaledTimeAsDouble, s_noMod);
+            if (step == TakeoverWatch.Step.Wait) return;
+            m_nview.ClaimOwnership();
+            zdo.Set(s_beatHash, ZNet.instance.GetTime().Ticks); // at once, so other modded games see it's taken
+            if (step == TakeoverWatch.Step.FoundNoMod) LogTakeover(owner);
+        }
+
+        /// <summary>The hiring game: send "follow me" again once a modded game runs the Dvergr.</summary>
+        private void FollowUp()
+        {
+            if (m_pending == null) return;
+            var player = Player.m_localPlayer;
+            if (player == null)
+            {
+                m_pending = null;
+                return;
+            }
+            var zdo = m_nview.GetZDO();
+            switch (m_pending.Decide(zdo.GetString(ZDOVars.s_follow), zdo.GetOwner(), zdo.GetLong(s_beatHash), m_nview.IsOwner(), Time.unscaledTimeAsDouble))
+            {
+                case PendingFollow.Step.Send:
+                    m_tameable.Command(player, message: false);
+                    Plugin.Log.LogInfo("Sent 'follow me' again: a game with the mod runs the hired Dvergr now");
+                    break;
+                case PendingFollow.Step.Done:
+                case PendingFollow.Step.GiveUp:
+                    m_pending = null;
+                    break;
+            }
+        }
+
+        /// <summary>Once per player found without the mod, by name when the player list has them.</summary>
+        private static void LogTakeover(long owner)
+        {
+            if (!s_logged.Add(owner)) return;
+            var name = "a player";
+            foreach (var player in ZNet.instance.GetPlayerList())
+                if (player.m_characterID.UserID == owner) name = player.m_name;
+            Plugin.Log.LogInfo($"Took control of hired Dvergr from {name}: their game doesn't run DvergrForHire (logged once per player)");
         }
     }
 }
