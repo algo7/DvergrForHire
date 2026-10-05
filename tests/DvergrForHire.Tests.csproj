@@ -21,6 +21,7 @@
     <Compile Include="../src/FieldSetting.cs" />
     <Compile Include="../src/DvergrSettings.cs" />
     <Compile Include="../src/HireRules.cs" />
+    <Compile Include="../src/MultiplayerRules.cs" />
   </ItemGroup>
 
   <ItemGroup>
