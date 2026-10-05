@@ -4,6 +4,19 @@ Got a pile of coins and nothing to spend it on? Hire some muscle. Walk up to a p
 you as your mercenary: it fights for you, never turns on you, and leaves your base standing. Client-side, and
 everything other players see is vanilla: no new creatures, items or effects.
 
+> **⚠️ Warning: everyone on the server should have this mod, same version. We highly recommend it.**
+>
+> The mod's rules only run in the games of players who have it. When a friend *without* the mod is the one whose game
+> controls your hired Dvergr (nobody with the mod is nearby, or for up to half a minute after you first meet them), your
+> Dvergr act like the game's own:
+>
+> - their missed shots, spells and the support mage's mistiles **can damage your buildings**,
+> - they don't follow you, and E does nothing,
+> - a hit from your friend angers the Dvergr nearby,
+> - Dvergr from a hiring post drop loot when they die.
+>
+> And whoever controls them, a friend without the mod can always hurt your hired Dvergr with any weapon.
+
 ## Quick Start
 
 1. Install with a mod manager (r2modman, Thunderstore Mod Manager, Gale): BepInEx comes along automatically.
@@ -97,8 +110,8 @@ time, your game checks for up to half a minute that the friend really doesn't ha
 friend's game controls it may stand still for that long before it follows you.
 
 Friends without the mod can hurt your hired Dvergr with any weapon, and if their game controls it at that moment, the
-hit angers the Dvergr nearby. Until your game takes control, a hired Dvergr can also still damage buildings. Best:
-everyone in your group has the mod, same version.
+hit angers the Dvergr nearby. Until your game takes control, a hired Dvergr can also still damage buildings. That's why
+we highly recommend that everyone on the server has the mod, same version (see the warning at the top).
 
 ## Compatibility
 
