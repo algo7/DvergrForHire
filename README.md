@@ -51,6 +51,18 @@ A mage's fireball, cluster bomb and ice bolt explode in a 3 m blast that damages
 `WearNTear.Damage` drops hits whose attacker is a hired Dvergr. It runs where the hit is worked out: the game running
 the Dvergr and its projectiles.
 
+### Hiring posts
+
+Six hammer entries are local copies of the vanilla Dvergr lantern pole (kept in a disabled holder, so they never become
+world objects) with their own name and cost: the pole's own cost plus materials from the Dvergr's home biome. A prefix on
+`Player.PlacePiece` places the real vanilla pole instead of the copy, and a postfix on `Piece.SetCreator` marks it with a
+hidden key (`DvergrForHire_Post`, the kind). The placing game then creates the recruiter: the vanilla Dvergr of that
+kind, tamed, told to stay (its patrol point), with a hidden key pointing at its pole (`DvergrForHire_Recruiter`). A
+`HiringPost` component on the vanilla pole prefab gives marked poles a hover text and E (the stars for the next hire,
+kept locally); unmarked poles stay vanilla. E on a recruiter pays and creates a new Dvergr of its kind in front of the
+player, tamed and following; the game running a recruiter removes it 10 s after its pole is gone. Players without the mod
+see a vanilla lantern pole and a tamed Dvergr.
+
 ### Who runs a Dvergr
 
 Valheim simulates each creature on one machine, the owner of its ZDO. A game without the mod runs a hired Dvergr as a
@@ -95,7 +107,7 @@ The Makefile looks for the SDK in `~/.dotnet`; pass `DOTNET=dotnet` if it's on y
 
 ```
 DvergrForHire.csproj       net48 plugin; Package target (zip + generated manifest)
-src/                       plugin: scene hook, prefab setup, Mercenary, Harmony patches, settings and rules
+src/                       plugin: scene hook, prefab setup, Mercenary (+ recruiter mode), hiring posts, Harmony patches, settings and rules
 package/                   Thunderstore README and icon (icon.svg is its source)
 tests/                     unit tests (net8.0)
 thunderstore.toml          Thunderstore publishing settings (tcli)

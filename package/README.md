@@ -23,10 +23,30 @@ Starred Dvergr cost 50 coins more per star. You pay once: no wages, no food. A h
 Deep North Dvergr only live inside the Mørkhalla dungeon, and one you hire there **stays in the dungeon**: it won't
 follow you out.
 
+## Hiring Posts
+
+Rather hire at home? Build a **hiring post** (hammer, Furniture tab, next to a black forge): a Dvergr lantern pole with a
+recruiter who stays by it.
+
+| Post | Hire price | Extra materials |
+|---|---|---|
+| Rogue, fire mage, ice mage, support mage | 100 coins | 10 yggdrasil wood, 5 black marble |
+| Ashlands | 200 coins | 10 ashwood, 5 grausten |
+| Deep North | 400 coins | 10 frostwood, 5 norn thread |
+
+- **Look at the post and press E** to pick the stars for your next hire (each star adds 50 coins).
+- **Press E at the recruiter** to hire: a new Dvergr appears in front of you and follows you right away. Hire as many as
+  you can pay for.
+- **Deep North Dvergr from a post follow you anywhere**, unlike the ones in Mørkhalla.
+- The recruiter guards the post. **If it dies, the post is done:** remove the pole (you get the pole's own materials
+  back) and build a new post. Remove a post and its recruiter leaves.
+- Friends without the mod see a Dvergr lantern pole with a Dvergr standing next to it.
+
 ## Features
 
 - **Every Dvergr is for hire:** crossbow rogues, fire, frost and support mages, and the tough Ashlands and Deep North
   Dvergr.
+- **Hiring posts:** hire at home, one post per kind of Dvergr, Deep North included.
 - **Follow, stay and rename** just like vanilla tamed animals.
 - **They fight for you:** anything hostile near you gets a bolt or a fireball. Support mages heal and buff you.
 - **They never attack players, and their bolts and spells don't damage your buildings or ships.**
@@ -71,7 +91,8 @@ everyone in your group has the mod, same version.
 
 Nothing is stored in your characters. Hired Dvergr stay in your world, friendly and with their names, but they stop
 following and wander around where they are, so tell them to **stay** at home first. Without the mod any weapon can hurt them
-again, and hitting one angers the Dvergr nearby. Reinstalling picks up where you left off.
+again, and hitting one angers the Dvergr nearby. Hiring posts stay as Dvergr lantern poles, and their recruiters stay as
+friendly Dvergr guarding the spot. Reinstalling picks up where you left off.
 
 ## Links
 
