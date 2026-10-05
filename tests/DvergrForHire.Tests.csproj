@@ -22,6 +22,8 @@
     <Compile Include="../src/DvergrSettings.cs" />
     <Compile Include="../src/HireRules.cs" />
     <Compile Include="../src/MultiplayerRules.cs" />
+    <Compile Include="../src/PostSettings.cs" />
+    <Compile Include="../src/PostRules.cs" />
   </ItemGroup>
 
   <ItemGroup>

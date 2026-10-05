@@ -64,12 +64,7 @@ namespace DvergrForHire
         /// </param>
         public static string Hover(string name, bool hired, bool provoked, int price, string vanilla)
         {
-            if (hired)
-            {
-                var lines = (vanilla ?? "").Split('\n');
-                var rename = lines.Length > 2 ? "\n" + string.Join("\n", lines, 2, lines.Length - 2) : "";
-                return name + " ( Hired )\n" + UseLine("Follow / Stay") + rename;
-            }
+            if (hired) return name + " ( Hired )\n" + UseLine("Follow / Stay") + RenameLines(vanilla);
             if (provoked) return ""; // like a vanilla Dvergr: no hover text
             return name + "\n" + UseLine("Hire: " + price.ToString(CultureInfo.InvariantCulture) + " coins");
         }
@@ -80,6 +75,14 @@ namespace DvergrForHire
         /// Wild ones keep vanilla's answer, so vanilla taming still never starts.
         /// </summary>
         public static bool Hungry(bool vanillaHungry, bool hired) => vanillaHungry && !hired;
+
+        /// <summary>Vanilla tamed hover text's lines from the third on (the rename line, keyboard or gamepad key), "\n"-led, or "".</summary>
+        internal static string RenameLines(string vanilla)
+        {
+            var lines = (vanilla ?? "").Split('\n');
+            return lines.Length > 2 ? "\n" + string.Join("\n", lines, 2, lines.Length - 2) : "";
+        }
+
 
         public static string NotEnoughCoins(int price) => "Not enough coins (" + price.ToString(CultureInfo.InvariantCulture) + ")";
 
