@@ -8,7 +8,7 @@ everything other players see is vanilla: no new creatures, items or effects.
 
 1. Install with a mod manager (r2modman, Thunderstore Mod Manager, Gale): BepInEx comes along automatically.
 2. Find a Dvergr you haven't angered and look at it: it tells you its price.
-3. Press **E** with enough coins in your inventory. It's yours and follows you.
+3. Press **E** with enough coins in your inventory. It's yours and **follows you right away**.
 
 ## Prices
 
@@ -32,6 +32,8 @@ Dvergr is yours until it dies.
 
 ## How Things Behave
 
+- **A new hire follows you right away.** Hiring one while you're running from a fight? Your hired gun runs away with
+  you. Press **E** to make it stay and hold its ground.
 - **Angry Dvergr won't work for you.** Hit one, or anger their camp, and those Dvergr stay angry until they die, like
   in vanilla. Their camp is off the market until new Dvergr show up.
 - **Hiring a Dvergr away from its camp leaves its spot empty:** the camp gets no new Dvergr there while yours is alive.
