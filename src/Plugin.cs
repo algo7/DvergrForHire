@@ -25,6 +25,9 @@ namespace DvergrForHire
         /// <summary>The summon marker hooks are in (hired mages' mistiles can't damage buildings).</summary>
         private static bool s_summonHook;
 
+        /// <summary>The shot hooks are in (a hired Dvergr's shots still count as its own after it dies).</summary>
+        private static bool s_shotHooks;
+
         /// <summary>Both hiring post hooks (placing, marking) are in.</summary>
         private static bool s_postHooks;
 
@@ -41,6 +44,7 @@ namespace DvergrForHire
             s_buildingHook = TryPatch(harmony, typeof(BuildingPatches), "building protection hook");
             s_postHooks = TryPatch(harmony, typeof(PostPatches), "hiring post hooks");
             s_summonHook = TryPatch(harmony, typeof(SummonPatches), "summon marker hooks");
+            s_shotHooks = TryPatch(harmony, typeof(ShotPatches), "shot hooks");
             SceneManager.sceneLoaded += OnSceneLoaded;
             Log.LogInfo($"{Name} loaded (v{PluginVersion})");
         }
@@ -73,6 +77,7 @@ namespace DvergrForHire
                 else if (hiring) Log.LogWarning("Hiring posts are off: the post hooks couldn't be installed (see above)");
                 if (!s_buildingHook) Log.LogWarning("Hired Dvergr can damage buildings: the protection hook couldn't be installed (see above)");
                 else if (!s_summonHook) Log.LogWarning("Hired mages' mistiles can damage buildings: the summon hooks couldn't be installed (see above)");
+                if (!s_shotHooks) Log.LogWarning("A hired Dvergr's shot that lands after it died can hit buildings, players and tames: the shot hooks couldn't be installed (see above)");
             }
             catch (Exception e)
             {

@@ -124,9 +124,32 @@ internal static partial class Tests
 
     private static void Test_Buildings_SafeFromHiresAndTheirSummons()
     {
-        True(HireRules.BuildingSafeFrom(true, false), "a hired Dvergr's hit");
-        True(HireRules.BuildingSafeFrom(false, true), "a hired mage's mistile exploding");
-        False(HireRules.BuildingSafeFrom(false, false), "anything else: vanilla damage");
+        True(HireRules.BuildingSafeFrom(true, false, false), "a hired Dvergr's hit");
+        True(HireRules.BuildingSafeFrom(false, true, false), "a hired mage's mistile exploding");
+        // User, 2026-10-06 ("fix all noted but unfixed issues"): a fireball or bolt that lands after its hired Dvergr died
+        // has no attacker in vanilla's hit, so the shot itself carries the marker.
+        True(HireRules.BuildingSafeFrom(false, false, true), "a hired Dvergr's shot landing after it died");
+        False(HireRules.BuildingSafeFrom(false, false, false), "anything else: vanilla damage");
+    }
+
+    private static void Test_Shots_WhoAHiredDvergrFights()
+    {
+        // BaseAI.IsEnemy for a tamed Dverger: players, tames and Dvergr that aren't provoked are friends.
+        False(HireRules.HiredDvergrFoe(players: true, tamed: false, dvergr: false, provoked: false), "a player");
+        False(HireRules.HiredDvergrFoe(players: false, tamed: true, dvergr: false, provoked: false), "a tame (wolf, lox, another hire)");
+        False(HireRules.HiredDvergrFoe(players: false, tamed: false, dvergr: true, provoked: false), "a wild Dvergr, not provoked");
+        True(HireRules.HiredDvergrFoe(players: false, tamed: false, dvergr: true, provoked: true), "a provoked wild Dvergr");
+        True(HireRules.HiredDvergrFoe(players: false, tamed: false, dvergr: false, provoked: false), "a troll");
+    }
+
+    private static void Test_Shots_DeadHiresShotsKeepTheirFlags()
+    {
+        // Vanilla hits everyone with a shot whose owner is gone; a hired Dvergr's shot keeps its own flags instead.
+        False(HireRules.ShotHits(foe: false, hitsFriends: false, hitsEnemies: true, hitsSameKind: true, sameKind: false), "fireball vs you");
+        True(HireRules.ShotHits(foe: true, hitsFriends: false, hitsEnemies: true, hitsSameKind: true, sameKind: false), "fireball vs a troll");
+        True(HireRules.ShotHits(foe: false, hitsFriends: true, hitsEnemies: false, hitsSameKind: true, sameKind: false), "heal vs you");
+        False(HireRules.ShotHits(foe: true, hitsFriends: true, hitsEnemies: false, hitsSameKind: true, sameKind: false), "heal vs a troll");
+        False(HireRules.ShotHits(foe: true, hitsFriends: false, hitsEnemies: true, hitsSameKind: false, sameKind: true), "fire puddle vs a provoked mage of its kind");
     }
 
     private static void Test_Messages()

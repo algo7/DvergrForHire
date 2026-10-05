@@ -88,8 +88,29 @@ namespace DvergrForHire
         public static bool MarkSummon(bool summonerHired, bool sameFrame, bool isItsSummonPrefab) =>
             summonerHired && sameFrame && isItsSummonPrefab;
 
-        /// <summary>Building pieces take no damage from a hired Dvergr or from what a hired Dvergr summoned (mistiles).</summary>
-        public static bool BuildingSafeFrom(bool hired, bool hiredSummon) => hired || hiredSummon;
+        /// <summary>
+        /// Building pieces take no damage from a hired Dvergr, from what a hired Dvergr summoned (mistiles), or from a shot a
+        /// hired Dvergr fired (also once the Dvergr has died: vanilla's hit then has no attacker).
+        /// </summary>
+        public static bool BuildingSafeFrom(bool hired, bool hiredSummon, bool hiredShot) => hired || hiredSummon || hiredShot;
+
+        /// <summary>
+        /// Whom a hired Dvergr fights, as BaseAI.IsEnemy decides for a tamed Dverger: players, tames and Dvergr that aren't
+        /// provoked are friends, everything else is a foe.
+        /// </summary>
+        public static bool HiredDvergrFoe(bool players, bool tamed, bool dvergr, bool provoked) =>
+            !players && !tamed && (!dvergr || provoked);
+
+        /// <summary>
+        /// Whether a hired Dvergr's shot whose Dvergr is gone (died before it landed) hits a creature. Vanilla has no owner to
+        /// ask then and hits everyone; this keeps the shot's own flags as vanilla applies them with the owner there: its own
+        /// kind (spell areas), friends (heal, buff), foes.
+        /// </summary>
+        public static bool ShotHits(bool foe, bool hitsFriends, bool hitsEnemies, bool hitsSameKind, bool sameKind)
+        {
+            if (sameKind && !hitsSameKind) return false;
+            return foe ? hitsEnemies : hitsFriends;
+        }
 
         /// <summary>A hover line for E, styled like vanilla's (localized later: $KEY_Use becomes the key).</summary>
         public static string UseLine(string action) => "[<color=yellow><b>$KEY_Use</b></color>] " + action;

@@ -133,14 +133,15 @@ namespace DvergrForHire
             m_paid = true;
             m_tamedSentAt = m_hiredAt;
             m_character.SetTamed(true); // vanilla RPC to whichever game runs it, with or without the mod
-            s_hireEffect?.Create(transform.position, transform.rotation);
-            player.Message(MessageHud.MessageType.Center, HireRules.Hired(m_tameable.GetName()));
             // Follow the hirer at once. With no owner at this moment the RPC would go to every game (target 0), and a later
             // re-send would toggle it back to stay; then the pending follow sends it once to the first game that runs it.
+            // Before the sound and message, so nothing after the payment can leave the hire without its "follow me".
             var owner = m_nview.GetZDO().GetOwner();
             if (owner != 0) m_tameable.Command(player, message: false);
             m_pending = new PendingFollow(player.GetPlayerName(), owner, m_hiredAt);
             Plugin.Log.LogInfo($"Hired {Utils.GetPrefabName(gameObject)} (level {m_character.GetLevel()}) for {price} coins");
+            s_hireEffect?.Create(transform.position, transform.rotation);
+            player.Message(MessageHud.MessageType.Center, HireRules.Hired(m_tameable.GetName()));
             return true;
         }
 
