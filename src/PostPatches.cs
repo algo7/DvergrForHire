@@ -29,7 +29,13 @@ namespace DvergrForHire
             try
             {
                 standIn = piece != null ? piece.GetComponent<PostStandIn>() : null;
-                if (standIn == null || PostSetup.s_pole == null) return true; // any other piece: vanilla
+                if (standIn == null) return true; // any other piece: vanilla
+                if (PostSetup.s_pole == null)
+                {
+                    // Never let vanilla create the stand-in itself: no other game knows that prefab.
+                    Plugin.Log.LogWarning("A hiring post can't be placed: the posts weren't set up (see the log above)");
+                    return false;
+                }
             }
             catch (Exception e)
             {

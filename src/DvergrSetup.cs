@@ -16,6 +16,7 @@ namespace DvergrForHire
             var prefabs = DvergrSettings.Hireable.Select(h => scene.GetPrefab(h.Prefab)).ToList();
             if (prefabs.All(p => p != null && p.GetComponent<Mercenary>() != null))
             {
+                SetStatics(scene); // cheap insurance: the coin name and hire sound from this scene's prefabs
                 message = "Dvergr already hireable (the prefabs survived the scene change)";
                 return true;
             }
@@ -25,8 +26,7 @@ namespace DvergrForHire
                 message = "DvergrForHire leaves the Dvergr alone: " + problem;
                 return false;
             }
-            Mercenary.s_coinName = scene.GetPrefab(DvergrSettings.Coins).GetComponent<ItemDrop>().m_itemData.m_shared.m_name;
-            Mercenary.s_hireEffect = SettingsApplier.Effects(new[] { DvergrSettings.HireSound }, scene.GetPrefab);
+            SetStatics(scene);
             foreach (var prefab in prefabs)
             {
                 SettingsApplier.Apply(prefab.AddComponent<Tameable>(), DvergrSettings.TameableSettings, scene.GetPrefab);
@@ -34,6 +34,15 @@ namespace DvergrForHire
             }
             message = "Dvergr can be hired: " + string.Join(", ", DvergrSettings.Hireable.Select(h => $"{h.Prefab} {h.Price}"));
             return true;
+        }
+
+        private static void SetStatics(ZNetScene scene)
+        {
+            var coins = scene.GetPrefab(DvergrSettings.Coins);
+            var drop = coins != null ? coins.GetComponent<ItemDrop>() : null;
+            if (drop != null) Mercenary.s_coinName = drop.m_itemData.m_shared.m_name;
+            if (scene.GetPrefab(DvergrSettings.HireSound) != null)
+                Mercenary.s_hireEffect = SettingsApplier.Effects(new[] { DvergrSettings.HireSound }, scene.GetPrefab);
         }
 
         /// <summary>Null when everything the setup needs is there and no other mod made the Dvergr tameable; else why not.</summary>
@@ -54,10 +63,10 @@ namespace DvergrForHire
             {
                 if (prefab.GetComponent<Humanoid>() == null || prefab.GetComponent<MonsterAI>() == null)
                     return $"{prefab.name} isn't a Humanoid with a MonsterAI (game update or another mod)";
+                if (prefab.GetComponent<Mercenary>() != null) // before the Tameable check: our own half-finished setup
+                    return "only some Dvergr were set up earlier this session: restart the game";
                 if (prefab.GetComponent<Tameable>() != null)
                     return $"{prefab.name} can already be tamed: another mod changed the Dvergr";
-                if (prefab.GetComponent<Mercenary>() != null)
-                    return "only some Dvergr were set up earlier this session: restart the game";
             }
             return null;
         }

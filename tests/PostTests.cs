@@ -67,6 +67,25 @@ internal static partial class Tests
         Eq(PostRules.RecruiterE.Nothing, PostRules.RecruiterInteract(true, true), "held Shift+E: nothing, like vanilla");
     }
 
+    private static void Test_Posts_HireSpotsFrontFirst()
+    {
+        // Reviewer: a hire 2 m ahead can land inside the recruiter or a hut wall. Spots (right, forward) from the player, tried
+        // in order until one is free: in front (as the user asked), then right, left, behind.
+        Eq("0,2;1.5,0;-1.5,0;0,-1.5",
+            string.Join(";", PostRules.HireSpots.Select(o => string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0},{1}", o.Right, o.Forward))),
+            "front first, then the sides, then behind");
+    }
+
+    private static void Test_Follow_NeverSentWaitsForTheFirstOwner()
+    {
+        // Hiring a camp Dvergr that has no owner at that moment: "follow me" isn't broadcast to everyone (target 0 = all games);
+        // the pending follow sends it once to the first game with the mod that runs it.
+        var follow = new PendingFollow("Astrid", 0, 0);
+        Eq(PendingFollow.Step.Wait, follow.Decide("", 0, 0, false, 1), "still no owner");
+        Eq(PendingFollow.Step.Send, follow.Decide("", Me, 0, true, 2), "our game got it: send now");
+        Eq(PendingFollow.Step.Wait, follow.Decide("", Me, 0, true, 3), "once");
+    }
+
     private static void Test_Posts_PoleBreaksOnlyAfterTenSecondsWithoutItsRecruiter()
     {
         // User, 2026-10-05: "when the post devger died the post should be gone too"; it breaks like a destroyed piece.

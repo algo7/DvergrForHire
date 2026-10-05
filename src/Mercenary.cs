@@ -84,7 +84,11 @@ namespace DvergrForHire
             if (!Ready) return null;
             if (IsRecruiter) return RecruiterInteract(user, hold, alt); // never follow / stay
             if (RecentlyHired) return false;        // a double press right after hiring doesn't toggle the new hire to "stay"
-            if (m_character.IsTamed()) return null; // hired: vanilla
+            if (m_character.IsTamed())
+            {
+                m_pending = null; // this player's own follow / stay wins over a late re-send of "follow me"
+                return null;      // hired: vanilla
+            }
             if (m_paid || hold || alt) return false; // paid, tamed flag not back yet: never pay twice
             return TryHire(user);
         }
@@ -118,8 +122,11 @@ namespace DvergrForHire
             m_character.SetTamed(true); // vanilla RPC to whichever game runs it, with or without the mod
             s_hireEffect?.Create(transform.position, transform.rotation);
             player.Message(MessageHud.MessageType.Center, HireRules.Hired(m_tameable.GetName()));
-            m_tameable.Command(player, message: false); // follow the hirer at once
-            m_pending = new PendingFollow(player.GetPlayerName(), m_nview.GetZDO().GetOwner(), m_hiredAt);
+            // Follow the hirer at once. With no owner at this moment the RPC would go to every game (target 0), and a later
+            // re-send would toggle it back to stay; then the pending follow sends it once to the first game that runs it.
+            var owner = m_nview.GetZDO().GetOwner();
+            if (owner != 0) m_tameable.Command(player, message: false);
+            m_pending = new PendingFollow(player.GetPlayerName(), owner, m_hiredAt);
             Plugin.Log.LogInfo($"Hired {Utils.GetPrefabName(gameObject)} (level {m_character.GetLevel()}) for {price} coins");
             return true;
         }

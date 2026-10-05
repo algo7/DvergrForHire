@@ -84,7 +84,9 @@ namespace DvergrForHire
             try
             {
                 var kind = Kind;
-                return kind == null ? "" : PostRules.EntryName(kind.Label);
+                if (kind != null) return PostRules.EntryName(kind.Label);
+                var piece = GetComponent<Piece>(); // an ordinary pole: "can't use … on Dvergr lantern pole", not an empty name
+                return piece != null ? Localization.instance.Localize(piece.m_name) : "";
             }
             catch (Exception e)
             {

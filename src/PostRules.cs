@@ -9,6 +9,18 @@ namespace DvergrForHire
     {
         public const int MaxStars = 2;
 
+        /// <summary>
+        /// Where a post hire appears, as (right, forward) metres from the player, tried in order until one is free: in front
+        /// (PostSettings.HireOffset), then right, left, behind (a hire 2 m ahead can land inside the recruiter or a hut wall).
+        /// </summary>
+        public static readonly (float Right, float Forward)[] HireSpots =
+        {
+            (0f, PostSettings.HireOffset),
+            (1.5f, 0f),
+            (-1.5f, 0f),
+            (0f, -1.5f),
+        };
+
         /// <summary>E on a post: none → ★ → ★★ → none; anything out of range goes back to none.</summary>
         public static int NextStars(int stars) => stars < 0 || stars >= MaxStars ? 0 : stars + 1;
 

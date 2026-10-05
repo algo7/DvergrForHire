@@ -71,7 +71,7 @@ namespace DvergrForHire
             }
             catch (Exception e)
             {
-                Log.LogError($"Dvergr setup failed, Dvergr stay vanilla: {e}");
+                Log.LogError($"Dvergr setup failed part-way (restart the game if hiring misbehaves): {e}");
             }
         }
 

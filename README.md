@@ -69,7 +69,8 @@ loaded (`ZNetScene.IsAreaReady`). Players without the mod see a vanilla lantern 
 ### Who runs a Dvergr
 
 Valheim simulates each creature on one machine, the owner of its ZDO. A game without the mod runs a hired Dvergr as a
-vanilla one: it stays tamed but doesn't follow, and its weapons can still hit it. So, as in
+vanilla one: it stays tamed but doesn't follow. (Whether a weapon can hit it is decided by the attacker's game: players
+without the mod can, whoever runs the Dvergr.) So, as in
 [SealsAtHome](https://github.com/algo7/SealsAtHome), a modded game that runs a hired Dvergr stamps a hidden heartbeat on
 it every 10 s (`DvergrForHire_Beat`), and a modded game that sees neither the owner nor the heartbeat change for 30 s of
 real time claims it (`ZNetView.ClaimOwnership`) and remembers that player for 5 minutes. Wild Dvergr act the same with or

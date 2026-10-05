@@ -108,9 +108,9 @@ namespace DvergrForHire
                 Plugin.Log.LogWarning($"Hire stopped: paying {price} of {coins} coins left {left}");
                 return true;
             }
-            var forward = player.transform.forward;
-            var pos = player.transform.position + forward * PostSettings.HireOffset + Vector3.up * 0.5f;
-            var hire = Instantiate(prefab, pos, Quaternion.LookRotation(-forward));
+            var pos = HireSpot(player);
+            var toPlayer = Vector3.ProjectOnPlane(player.transform.position - pos, Vector3.up);
+            var hire = Instantiate(prefab, pos, toPlayer.sqrMagnitude > 0.01f ? Quaternion.LookRotation(toPlayer) : Quaternion.identity);
             var hired = hire.GetComponent<Mercenary>();
             if (hired != null) hired.m_hiredAt = Time.unscaledTimeAsDouble; // a double press doesn't toggle the new hire to stay
             var character = hire.GetComponent<Character>();
@@ -122,6 +122,23 @@ namespace DvergrForHire
             player.Message(MessageHud.MessageType.Center, HireRules.Hired(tameable.GetName()));
             Plugin.Log.LogInfo($"Hired a {kind.Label} at a hiring post (level {stars + 1}) for {price} coins");
             return true;
+        }
+
+        private static int s_hireSpotMask;
+
+        /// <summary>The first free spot around the player (PostRules.HireSpots order), 0.5 m up; in front if none is free.</summary>
+        private static Vector3 HireSpot(Player player)
+        {
+            if (s_hireSpotMask == 0)
+                s_hireSpotMask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece", "terrain", "character", "character_net", "vehicle");
+            var t = player.transform;
+            Vector3 At((float Right, float Forward) o) => t.position + t.right * o.Right + t.forward * o.Forward + Vector3.up * 0.5f;
+            foreach (var offset in PostRules.HireSpots)
+            {
+                var spot = At(offset);
+                if (!Physics.CheckSphere(spot + Vector3.up * 0.6f, 0.45f, s_hireSpotMask)) return spot; // body height: 0.65..1.55 m
+            }
+            return At(PostRules.HireSpots[0]);
         }
 
         /// <summary>
