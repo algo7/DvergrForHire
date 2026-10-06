@@ -14,7 +14,7 @@ other players only ever see the game's own creatures and items.
 >
 > - their shots and spells **can damage your buildings**,
 > - they don't follow you, and E does nothing,
-> - if that friend hits one, the wild Dvergr nearby get angry.
+> - if that friend hits one, the wild Dvergr nearby (if any) get angry.
 >
 > Friends without the mod can always hurt your hired Dvergr.
 
@@ -113,9 +113,9 @@ you again. The first time, this takes up to half a minute; until then, see the w
 ## Uninstalling
 
 Hired Dvergr stay in your world, friendly and named, but stop following, so tell them to **stay** at home first. Any
-weapon can hurt them again, and hitting one angers the wild Dvergr nearby. The hiring posts disappear from the building
-menu; posts you already built stay as lantern poles with a friendly Dvergr next to them. Reinstalling picks up where
-you left off.
+weapon can hurt them again, and hitting one angers the wild Dvergr nearby (if any). The hiring posts disappear from
+the building menu; posts you already built stay as lantern poles with a friendly Dvergr next to them. Reinstalling
+picks up where you left off.
 
 ## Links
 
