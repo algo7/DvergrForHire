@@ -19,5 +19,5 @@ communities = ["valheim"]
 
 [publish.categories]
 # npcs: the Dvergr. deep-north-update: the game update it is built and tested for (Valheim 1.0). ai-generated: made
-# with AI assistance. (Confirm with the user before the first release.)
+# with AI assistance.
 valheim = ["mods", "client-side", "npcs", "deep-north-update", "ai-generated"]
