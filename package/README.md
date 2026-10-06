@@ -56,8 +56,6 @@ extra materials below.
 
 Hiring at home costs 20% more than at a camp.
 
-![The six recruiters: rogue, fire mage, ice mage and support mage (120 coins), Ashlands (240) and Deep North (480)](https://raw.githubusercontent.com/algo7/DvergrForHire/main/images/recruiters.jpg)
-
 - **Look at the post and press E** to pick the stars for your next hire (each star adds 60 coins at a post).
 - **Press E at the recruiter** to hire: a new Dvergr appears in front of you and follows you right away. Hire as many as
   you can pay for.
@@ -69,6 +67,13 @@ Hiring at home costs 20% more than at a camp.
 - Friends without the mod see a Dvergr lantern pole with a Dvergr standing next to it.
 
 ![Picking two stars on a hiring post, and the two-star rogue it hires next to the recruiter](https://raw.githubusercontent.com/algo7/DvergrForHire/main/images/stars.jpg)
+
+### Pick Your Dvergr
+
+There's a post for every kind of Dvergr, so you choose exactly who you hire: crossbow rogues, fire, ice and support
+mages, and the tough Ashlands and Deep North Dvergr. Build the posts you want side by side and mix your crew.
+
+![The six recruiters: rogue, fire mage, ice mage and support mage (120 coins), Ashlands (240) and Deep North (480)](https://raw.githubusercontent.com/algo7/DvergrForHire/main/images/recruiters.jpg)
 
 ## Features
 
