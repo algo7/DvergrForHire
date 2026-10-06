@@ -9,8 +9,8 @@ pick exactly the Dvergr you want, Deep North included. Nothing to install on the
 > **⚠️ It's highly recommended that everyone on the server has this mod, same version.**
 >
 > In multiplayer, one player's game controls each creature. While a friend's game *without* the mod controls your hired
-> Dvergr (nobody with the mod nearby, or the first 30 seconds after you meet that friend), they **stay hired and
-> friendly**, but:
+> Dvergr (nobody with the mod nearby, or for 30 seconds after you enter an area that friend loaded first), they **stay
+> hired and friendly**, but:
 >
 > - their shots and spells **can damage your buildings**,
 > - they don't follow you, and E does nothing,
