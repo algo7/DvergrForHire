@@ -29,14 +29,13 @@ server, and everything other players see is vanilla: no new creatures, items or 
 
 ## Prices
 
-| Dvergr | Price |
-|---|---|
-| Mistlands rogue or mage | 100 coins |
-| Ashlands | 200 coins |
-| Deep North (in the Mørkhalla dungeon) | 100 coins |
+| Dvergr | Price | ★ | ★★ |
+|---|---|---|---|
+| Mistlands rogue or mage | 100 coins | 150 | 225 |
+| Ashlands | 200 coins | 300 | 450 |
+| Deep North (in the Mørkhalla dungeon) | 100 coins | 150 | 225 |
 
-Each star makes a Dvergr cost 50% more than one star fewer: a 100-coin Dvergr costs 150 with ★ and 225 with ★★. You
-pay once: no wages, no food. A hired Dvergr is yours until it dies.
+Each star costs 50% more than one star fewer. You pay once: no wages, no food. A hired Dvergr is yours until it dies.
 
 Deep North Dvergr only live inside the Mørkhalla dungeon, and one you hire there **stays in the dungeon**: it won't
 follow you out.
@@ -49,16 +48,15 @@ extra materials below.
 
 ![The hammer's Defence section with the six hiring posts, and what the rogue post costs](https://raw.githubusercontent.com/algo7/DvergrForHire/main/images/build-menu.jpg)
 
-| Post | Hire price | Extra materials |
-|---|---|---|
-| Rogue, fire mage, ice mage, support mage | 120 coins | 10 yggdrasil wood, 5 black marble |
-| Ashlands | 240 coins | 10 ashwood, 5 grausten |
-| Deep North | 480 coins | 10 frostwood, 5 norn thread |
+| Post | Hire price | ★ | ★★ | Extra materials |
+|---|---|---|---|---|
+| Rogue, fire mage, ice mage, support mage | 120 coins | 180 | 270 | 10 yggdrasil wood, 5 black marble |
+| Ashlands | 240 coins | 360 | 540 | 10 ashwood, 5 grausten |
+| Deep North | 480 coins | 720 | 1080 | 10 frostwood, 5 norn thread |
 
 Hiring at home costs 20% more than at a camp.
 
-- **Look at the post and press E** to pick the stars for your next hire. Each star costs 50% more: a rogue is 120, 180
-  with ★, 270 with ★★.
+- **Look at the post and press E** to pick the stars for your next hire (see the ★ and ★★ prices above).
 - **Press E at the recruiter** to hire: a new Dvergr appears in front of you and follows you right away. Hire as many as
   you can pay for.
 - **Deep North Dvergr from a post follow you around the world**, unlike the ones stuck in Mørkhalla (but not through
