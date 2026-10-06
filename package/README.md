@@ -13,8 +13,7 @@ pick exactly the Dvergr you want, Deep North included. Nothing to install on the
 > hired and friendly**, but:
 >
 > - their shots and spells **can damage your buildings**,
-> - they don't follow you, and E does nothing,
-> - if that friend hits one, the wild Dvergr nearby (if any) get angry.
+> - they don't follow you, and E does nothing.
 >
 > Friends without the mod can always hurt your hired Dvergr.
 
@@ -112,9 +111,8 @@ you again. The first time, this takes up to 30 seconds; until then, see the warn
 ## Uninstalling
 
 Hired Dvergr stay in your world, friendly and named, but stop following, so tell them to **stay** at home first. Any
-weapon can hurt them again, and hitting one angers the wild Dvergr nearby (if any). The hiring posts disappear from
-the building menu; posts you already built stay as lantern poles with a friendly Dvergr next to them. Reinstalling
-picks up where you left off.
+weapon can hurt them again. The hiring posts disappear from the building menu; posts you already built stay as
+lantern poles with a friendly Dvergr next to them. Reinstalling picks up where you left off.
 
 ## Links
 
