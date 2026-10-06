@@ -37,8 +37,8 @@ server, and everything other players see is vanilla: no new creatures, items or 
 
 Each star costs 50% more than one star fewer. You pay once: no wages, no food. A hired Dvergr is yours until it dies.
 
-The game uses the same model and armour for Ashlands and Deep North Dvergr (it even names the Ashlands one "Dvergr
-Rogue"), but the Deep North one is tougher and hits harder.
+The game uses the same model and armour for Ashlands and Deep North Dvergr, but the Deep North one ("Imprisoned
+Dvergr" in the game) is tougher and hits harder.
 
 Deep North Dvergr only live inside the Mørkhalla dungeon, and one you hire there **stays in the dungeon**: it won't
 follow you out. That's why they're cheap: they only help you clear that dungeon. Want one that follows you around the
