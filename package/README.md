@@ -112,10 +112,10 @@ you again. The first time, this takes up to half a minute; until then, see the w
 
 ## Uninstalling
 
-Your characters don't need the mod: the hiring posts just disappear from the building menu. Hired Dvergr stay in your
-world, friendly and named, but stop following, so tell them to **stay** at home first. Any weapon can hurt them again,
-and hitting one angers the wild Dvergr nearby. Posts stay as lantern poles with a friendly Dvergr next to them.
-Reinstalling picks up where you left off.
+Hired Dvergr stay in your world, friendly and named, but stop following, so tell them to **stay** at home first. Any
+weapon can hurt them again, and hitting one angers the wild Dvergr nearby. The hiring posts disappear from the building
+menu; posts you already built stay as lantern poles with a friendly Dvergr next to them. Reinstalling picks up where
+you left off.
 
 ## Links
 
