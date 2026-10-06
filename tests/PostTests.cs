@@ -18,6 +18,13 @@ internal static partial class Tests
         Eq("piece_dvergr_lantern_pole", PostSettings.Pole, "the post is the vanilla Dvergr lantern pole");
     }
 
+    private static void Test_Posts_InTheDefenseSection()
+    {
+        // User, 2026-10-06: the posts were only found at the bottom of "All" (they copied the lantern pole's Lighting tag);
+        // "add it to the defense section". The build menu's sections are the pieces' usage tags: Defense only, not Lighting.
+        Eq(Piece.UsageTagFlags.Defense, PostSettings.Section, "the hammer's Defense section, and only there");
+    }
+
     private static void Test_Posts_EveryKindIsHireable()
     {
         foreach (var kind in PostSettings.Kinds)

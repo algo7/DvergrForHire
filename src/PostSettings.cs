@@ -33,8 +33,14 @@ namespace DvergrForHire
     /// <summary>The hiring posts (user, 2026-10-05): one per kind, camp prices, Deep North 400, the home biome's materials as the fee.</summary>
     internal static class PostSettings
     {
-        /// <summary>The vanilla piece a post places (black forge, Furniture tab; no hover / E of its own).</summary>
+        /// <summary>The vanilla piece a post places (black forge; no hover / E of its own).</summary>
         public const string Pole = "piece_dvergr_lantern_pole";
+
+        /// <summary>
+        /// The hammer menu section the post entries show in (the menu's sections are the pieces' usage tags). The pole itself is
+        /// tagged Lighting, which the entries would copy (user: "add it to the defense section").
+        /// </summary>
+        public const Piece.UsageTagFlags Section = Piece.UsageTagFlags.Defense;
 
         /// <summary>The item whose piece table gets the six entries.</summary>
         public const string Hammer = "Hammer";

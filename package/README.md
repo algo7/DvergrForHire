@@ -38,7 +38,7 @@ follow you out.
 
 ## Hiring Posts
 
-Rather hire at home? Build a **hiring post** (hammer, Furniture tab, next to a black forge): a Dvergr lantern pole with a
+Rather hire at home? Build a **hiring post** (hammer, Defense section, next to a black forge): a Dvergr lantern pole with a
 recruiter who stays by it. A post costs the lantern pole's usual materials (3 copper, 1 Dvergr lantern, 1 chain) plus the
 extra materials below.
 

@@ -80,6 +80,7 @@ namespace DvergrForHire
                 var piece = standIn.GetComponent<Piece>();
                 piece.m_name = PostRules.EntryName(kind.Label);
                 piece.m_description = PostRules.EntryDescription(kind.Label);
+                piece.m_usage = PostSettings.Section;
                 piece.m_resources = piece.m_resources
                     .Concat(kind.Fee.Select(f => new Piece.Requirement
                     {
