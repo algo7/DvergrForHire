@@ -9,7 +9,7 @@
     <MinVerMinimumMajorMinor>1.0</MinVerMinimumMajorMinor>
     <!-- Thunderstore namespace / r2modman author; the package's manifest.json is generated from these (Package target). -->
     <ModAuthor>Algo7</ModAuthor>
-    <ModDescription>Hire the game's own Dvergr with coins: they follow you, fight for you, and never hurt you or your base. Client-side, vanilla content only.</ModDescription>
+    <ModDescription>Hire the game's own Dvergr with coins, at their camps or at hiring posts you build at home: they follow you, fight for you, and never hurt you or your base. Client-side, vanilla content only.</ModDescription>
     <ModWebsite>https://github.com/algo7/DvergrForHire</ModWebsite>
     <BepInExPackDependency>denikson-BepInExPack_Valheim-5.4.2351</BepInExPackDependency>
     <LangVersion>latest</LangVersion>
