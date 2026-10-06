@@ -34,7 +34,8 @@ other players only ever see the game's own creatures and items.
 | Ashlands | 200 coins | 300 | 450 |
 | Deep North (in the Mørkhalla dungeon) | 100 coins | 150 | 225 |
 
-Each star costs 50% more. You pay once: no wages, no food.
+Each star costs 50% more. You pay once: no wages, no food, and they still heal on their own (slowly: about an hour of
+play from nearly dead to full health).
 
 Ashlands and Deep North Dvergr look the same in the game, but the Deep North one has better stats.
 
