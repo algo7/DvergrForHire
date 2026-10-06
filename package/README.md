@@ -72,8 +72,8 @@ Hiring at home costs 20% more than at a camp.
 
 ## Features
 
-- **Every Dvergr is for hire:** crossbow rogues, fire, frost and support mages, and the tough Ashlands and Deep North
-  Dvergr.
+- **Every Dvergr is for hire** (except the ones you've angered): crossbow rogues, fire, frost and support mages, and the
+  tough Ashlands and Deep North Dvergr.
 - **Hiring posts:** hire at home, one post per kind of Dvergr, Deep North included.
 - **Follow, stay and rename** just like vanilla tamed animals.
 - **They fight for you:** anything hostile near you gets a bolt or a fireball. Support mages heal and buff you.
