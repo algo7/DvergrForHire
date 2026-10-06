@@ -25,7 +25,7 @@ server, and everything other players see is vanilla: no new creatures, items or 
 2. Find a Dvergr you haven't angered and look at it: it tells you its price.
 3. Press **E** with enough coins in your inventory. It's yours and **follows you right away**.
 
-![A hired Dvergr rogue: "Dvergr Rogue ( Hired )", [E] Follow / Stay, [Left Shift + E] Rename](https://raw.githubusercontent.com/algo7/DvergrForHire/main/images/follow-stay.jpg)
+![A wild Dvergr: "[E] Hire: 200 coins"; the same Dvergr after paying: "Dvergr Rogue ( Hired )", [E] Follow / Stay](https://raw.githubusercontent.com/algo7/DvergrForHire/main/images/hire.jpg)
 
 ## Prices
 
