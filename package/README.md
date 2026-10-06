@@ -6,7 +6,7 @@ Got a pile of coins and nothing to spend it on? Hire some muscle. Pay a peaceful
 mercenary: it fights for you, never turns on you, and leaves your base standing. Or build a **hiring post** at home and
 pick exactly the Dvergr you want, Deep North included. Nothing to install on the server.
 
-> **⚠️ Everyone on the server should have this mod, same version.**
+> **⚠️ It's highly recommended that everyone on the server has this mod, same version.**
 >
 > In multiplayer, one player's game controls each creature. While a friend's game *without* the mod controls your hired
 > Dvergr (nobody with the mod nearby, or the first half minute after you meet that friend), they **stay hired and
