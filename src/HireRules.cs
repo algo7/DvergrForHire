@@ -15,11 +15,16 @@ namespace DvergrForHire
         }
 
         /// <summary>
-        /// Base price + StarPrice per star (level 1 = no stars; a level below 1 has none, so a hire is never free). No base
-        /// price (not a hireable kind) stays 0 whatever the stars, so it stays not for hire.
+        /// Base price, then StarPercent more for each star (level 1 = no stars; a level below 1 has none, so a hire is never
+        /// free), rounded to whole coins at the end, halves up. No base price (not a hireable kind) stays 0 whatever the
+        /// stars, so it stays not for hire.
         /// </summary>
-        public static int Price(int basePrice, int level) =>
-            basePrice <= 0 ? 0 : basePrice + DvergrSettings.StarPrice * Math.Max(0, level - 1);
+        public static int Price(int basePrice, int level)
+        {
+            if (basePrice <= 0) return 0;
+            var price = basePrice * Math.Pow(1 + DvergrSettings.StarPercent / 100.0, Math.Max(0, level - 1));
+            return (int)Math.Round(price, MidpointRounding.AwayFromZero);
+        }
 
         /// <param name="tamed">Hired already, or paid here and the tamed flag not seen yet.</param>
         public static Hire Check(bool alive, bool tamed, bool provoked, int coins, int price)

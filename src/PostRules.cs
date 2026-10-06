@@ -22,7 +22,7 @@ namespace DvergrForHire
         };
 
         /// <summary>
-        /// The price of a hire at a post: the camp price (HireRules.Price: base + 50 per star) plus PostSettings.PremiumPercent,
+        /// The price of a hire at a post: the camp price (HireRules.Price: base, 50% more per star) plus PostSettings.PremiumPercent,
         /// rounded to whole coins. No base price stays 0 (not for hire).
         /// </summary>
         public static int PostPrice(int basePrice, int level)

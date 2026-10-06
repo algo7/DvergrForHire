@@ -2,13 +2,15 @@ using DvergrForHire;
 
 internal static partial class Tests
 {
-    private static void Test_Price_FiftyPerStar()
+    private static void Test_Price_FiftyPercentPerStar()
     {
-        // User, 2026-10-05: "for star cost just plus 50 for each star" (level 1 = no stars).
+        // User, 2026-10-06: "the star ones should cost 50% more than its previous tier" (was +50 coins per star; level 1 =
+        // no stars). Rounded to whole coins at the end, halves up.
         Eq(100, HireRules.Price(100, 1), "no stars");
-        Eq(150, HireRules.Price(100, 2), "1 star: +50");
-        Eq(200, HireRules.Price(100, 3), "2 stars: +100");
-        Eq(300, HireRules.Price(200, 3), "Ashlands, 2 stars");
+        Eq(150, HireRules.Price(100, 2), "1 star: 100 × 1.5");
+        Eq(225, HireRules.Price(100, 3), "2 stars: 150 × 1.5");
+        Eq(450, HireRules.Price(200, 3), "Ashlands, 2 stars: 200 × 1.5 × 1.5");
+        Eq(338, HireRules.Price(100, 4), "3 stars (other mods): 337.5 rounds up");
     }
 
     private static void Test_Price_LevelBelowOneCountsAsOne()

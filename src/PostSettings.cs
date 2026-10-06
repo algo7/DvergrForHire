@@ -17,7 +17,7 @@ namespace DvergrForHire
         /// <summary>The recruiter's and every hire's prefab.</summary>
         public readonly string Prefab;
 
-        /// <summary>Hire price with no stars (+ DvergrSettings.StarPrice per star, HireRules.Price).</summary>
+        /// <summary>Hire price with no stars (DvergrSettings.StarPercent more per star, HireRules.Price).</summary>
         public readonly int Price;
 
         /// <summary>Paid on top of the lantern pole's own cost; removing the pole refunds only the pole's cost.</summary>

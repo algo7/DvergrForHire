@@ -22,8 +22,11 @@ namespace DvergrForHire
             ("DvergerDeepNorth", 100),
         };
 
-        /// <summary>Coins each star adds to the price (user: "plus 50 for each star").</summary>
-        public const int StarPrice = 50;
+        /// <summary>
+        /// Each star makes a Dvergr cost this much more than one star fewer, in percent (user, 2026-10-06: "the star ones should
+        /// cost 50% more than its previous tier").
+        /// </summary>
+        public const int StarPercent = 50;
 
         public const string Coins = "Coins";
 

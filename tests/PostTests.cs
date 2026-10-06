@@ -36,13 +36,14 @@ internal static partial class Tests
 
     private static void Test_Posts_PriceWithStars()
     {
-        // User, 2026-10-05: "add a 20% premium on post hire": the whole price (base + 50 per star) × 1.2.
+        // The camp price (50% more per star, user 2026-10-06) plus the 20% post premium (user: "add a 20% premium on post hire").
         Eq(120, PostRules.PostPrice(PostSettings.ById("rogue").Price, 1), "rogue, no stars: 100 × 1.2");
         Eq(180, PostRules.PostPrice(PostSettings.ById("firemage").Price, 2), "fire mage, 1 star: 150 × 1.2");
-        Eq(360, PostRules.PostPrice(PostSettings.ById("ashlands").Price, 3), "Ashlands, 2 stars: 300 × 1.2");
-        Eq(600, PostRules.PostPrice(PostSettings.ById("deepnorth").Price, 3), "Deep North, 2 stars: 500 × 1.2");
+        Eq(270, PostRules.PostPrice(PostSettings.ById("icemage").Price, 3), "ice mage, 2 stars: 225 × 1.2");
+        Eq(540, PostRules.PostPrice(PostSettings.ById("ashlands").Price, 3), "Ashlands, 2 stars: 450 × 1.2");
+        Eq(480, PostRules.PostPrice(PostSettings.ById("deepnorth").Price, 1), "Deep North, no stars: 400 × 1.2");
+        Eq(1080, PostRules.PostPrice(PostSettings.ById("deepnorth").Price, 3), "Deep North, 2 stars: 900 × 1.2");
         Eq(0, PostRules.PostPrice(0, 3), "no base price stays not for hire");
-        Eq(20, PostSettings.PremiumPercent, "the premium");
     }
 
     private static void Test_Posts_StarsCycle()

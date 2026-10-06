@@ -35,7 +35,8 @@ server, and everything other players see is vanilla: no new creatures, items or 
 | Ashlands | 200 coins |
 | Deep North (in the Mørkhalla dungeon) | 100 coins |
 
-Starred Dvergr cost 50 coins more per star. You pay once: no wages, no food. A hired Dvergr is yours until it dies.
+Each star makes a Dvergr cost 50% more than one star fewer: a 100-coin Dvergr costs 150 with ★ and 225 with ★★. You
+pay once: no wages, no food. A hired Dvergr is yours until it dies.
 
 Deep North Dvergr only live inside the Mørkhalla dungeon, and one you hire there **stays in the dungeon**: it won't
 follow you out.
@@ -56,7 +57,8 @@ extra materials below.
 
 Hiring at home costs 20% more than at a camp.
 
-- **Look at the post and press E** to pick the stars for your next hire (each star adds 60 coins at a post).
+- **Look at the post and press E** to pick the stars for your next hire. Each star costs 50% more: a rogue is 120, 180
+  with ★, 270 with ★★.
 - **Press E at the recruiter** to hire: a new Dvergr appears in front of you and follows you right away. Hire as many as
   you can pay for.
 - **Deep North Dvergr from a post follow you around the world**, unlike the ones stuck in Mørkhalla (but not through
@@ -106,7 +108,7 @@ mages, and the tough Ashlands and Deep North Dvergr. Build the posts you want si
   nothing to keep paying.
 - **Cheap enough to lose.** Dvergr hit hard but don't last forever, so a hire costs about the coins a dozen Dvergr drop.
   Ashlands Dvergr are much tougher, so they cost more. Stars make a Dvergr a lot stronger (more health, more
-  damage), so each star adds to the price.
+  damage), so each star adds 50% to the price.
 - **Deep North Dvergr in Mørkhalla are cheap** because they can't leave their dungeon: they're helpers for that one
   place. One from a hiring post follows you everywhere, so it costs the most.
 - **Hiring posts cost 20% more than camps.** You're paying for not walking to a camp; camps stay the cheap option.
