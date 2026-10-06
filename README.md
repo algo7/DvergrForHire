@@ -2,6 +2,8 @@
 
 [![CI](https://github.com/algo7/DvergrForHire/actions/workflows/ci.yml/badge.svg)](https://github.com/algo7/DvergrForHire/actions/workflows/ci.yml)
 
+![Hired Dvergr fighting a Seeker inside a palisade pen](images/header.jpg)
+
 A client-side [BepInEx](https://github.com/BepInEx/BepInEx) mod for Valheim: hire the game's own Dvergr with coins as
 mercenaries. Players without the mod only ever see vanilla things.
 
@@ -116,6 +118,7 @@ The Makefile looks for the SDK in `~/.dotnet`; pass `DOTNET=dotnet` if it's on y
 DvergrForHire.csproj       net48 plugin; Package target (zip + generated manifest)
 src/                       plugin: scene hook, prefab setup, Mercenary (+ recruiter mode), hiring posts, Harmony patches, settings and rules
 package/                   Thunderstore README and icon (icon.svg is its source)
+images/                    screenshots for the READMEs (not in the zip)
 tests/                     unit tests (net8.0)
 thunderstore.toml          Thunderstore publishing settings (tcli)
 .github/                   workflows, Dependabot, the CI helper that fetches the game DLLs

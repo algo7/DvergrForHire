@@ -1,5 +1,7 @@
 # DvergrForHire
 
+![Hired Dvergr fighting a Seeker inside a palisade pen](https://raw.githubusercontent.com/algo7/DvergrForHire/main/images/header.jpg)
+
 Got a pile of coins and nothing to spend it on? Hire some muscle. Walk up to a peaceful Dvergr, pay, and it follows
 you as your mercenary: it fights for you, never turns on you, and leaves your base standing. Nothing to install on the
 server, and everything other players see is vanilla: no new creatures, items or effects.
@@ -23,6 +25,8 @@ server, and everything other players see is vanilla: no new creatures, items or 
 2. Find a Dvergr you haven't angered and look at it: it tells you its price.
 3. Press **E** with enough coins in your inventory. It's yours and **follows you right away**.
 
+![A hired Dvergr rogue: "Dvergr Rogue ( Hired )", [E] Follow / Stay, [Left Shift + E] Rename](https://raw.githubusercontent.com/algo7/DvergrForHire/main/images/follow-stay.jpg)
+
 ## Prices
 
 | Dvergr | Price |
@@ -38,9 +42,11 @@ follow you out.
 
 ## Hiring Posts
 
-Rather hire at home? Build a **hiring post** (hammer, Defense section, next to a black forge): a Dvergr lantern pole with a
+Rather hire at home? Build a **hiring post** (hammer, Defence section, next to a black forge): a Dvergr lantern pole with a
 recruiter who stays by it. A post costs the lantern pole's usual materials (3 copper, 1 Dvergr lantern, 1 chain) plus the
 extra materials below.
+
+![The hammer's Defence section with the six hiring posts, and what the rogue post costs](https://raw.githubusercontent.com/algo7/DvergrForHire/main/images/build-menu.jpg)
 
 | Post | Hire price | Extra materials |
 |---|---|---|
@@ -49,6 +55,8 @@ extra materials below.
 | Deep North | 480 coins | 10 frostwood, 5 norn thread |
 
 Hiring at home costs 20% more than at a camp.
+
+![The six recruiters: rogue, fire mage, ice mage and support mage (120 coins), Ashlands (240) and Deep North (480)](https://raw.githubusercontent.com/algo7/DvergrForHire/main/images/recruiters.jpg)
 
 - **Look at the post and press E** to pick the stars for your next hire (each star adds 60 coins at a post).
 - **Press E at the recruiter** to hire: a new Dvergr appears in front of you and follows you right away. Hire as many as
@@ -60,6 +68,8 @@ Hiring at home costs 20% more than at a camp.
 - Hired Dvergr, recruiters included, never damage your buildings.
 - Friends without the mod see a Dvergr lantern pole with a Dvergr standing next to it.
 
+![Picking two stars on a hiring post, and the two-star rogue it hires next to the recruiter](https://raw.githubusercontent.com/algo7/DvergrForHire/main/images/stars.jpg)
+
 ## Features
 
 - **Every Dvergr is for hire:** crossbow rogues, fire, frost and support mages, and the tough Ashlands and Deep North
@@ -69,6 +79,8 @@ Hiring at home costs 20% more than at a camp.
 - **They fight for you:** anything hostile near you gets a bolt or a fireball. Support mages heal and buff you.
 - **They never attack players, and their bolts and spells don't damage your buildings or ships.**
 - **Your weapons don't hurt them**, like any tamed animal (only PvP and the butcher knife do).
+
+![Hired Dvergr fighting a two-star Seeker Soldier at dusk](https://raw.githubusercontent.com/algo7/DvergrForHire/main/images/combat.jpg)
 
 ## How Things Behave
 
