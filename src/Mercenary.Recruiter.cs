@@ -63,7 +63,7 @@ namespace DvergrForHire
             var kind = Kind;
             if (kind == null) return vanilla;
             var price = PostRules.PostPrice(kind.Price, PostStars + 1);
-            return Localization.instance.Localize(PostRules.RecruiterHover(kind.Label, price, vanilla));
+            return Localization.instance.Localize(PostRules.RecruiterHover(kind.Label, kind.One, price, vanilla));
         }
 
         /// <summary>The E patch for a recruiter: null = vanilla (Shift+E rename); else the result.</summary>

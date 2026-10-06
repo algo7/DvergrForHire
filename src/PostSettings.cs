@@ -11,6 +11,9 @@ namespace DvergrForHire
         /// <summary>As in "Hiring post: fire mage" (lower case, names keep their capitals).</summary>
         public readonly string Label;
 
+        /// <summary>What the post hires, with its article, as in the recruiter's "[E] Hire a rogue" (the biome kinds add "Dvergr").</summary>
+        public readonly string One;
+
         /// <summary>The recruiter's and every hire's prefab.</summary>
         public readonly string Prefab;
 
@@ -20,10 +23,11 @@ namespace DvergrForHire
         /// <summary>Paid on top of the lantern pole's own cost; removing the pole refunds only the pole's cost.</summary>
         public readonly (string Item, int Amount)[] Fee;
 
-        public PostKind(string id, string label, string prefab, int price, params (string Item, int Amount)[] fee)
+        public PostKind(string id, string label, string one, string prefab, int price, params (string Item, int Amount)[] fee)
         {
             Id = id;
             Label = label;
+            One = one;
             Prefab = prefab;
             Price = price;
             Fee = fee;
@@ -73,12 +77,12 @@ namespace DvergrForHire
 
         public static readonly PostKind[] Kinds =
         {
-            new PostKind("rogue", "rogue", "Dverger", 100, Mistlands),
-            new PostKind("firemage", "fire mage", "DvergerMageFire", 100, Mistlands),
-            new PostKind("icemage", "ice mage", "DvergerMageIce", 100, Mistlands),
-            new PostKind("supportmage", "support mage", "DvergerMageSupport", 100, Mistlands),
-            new PostKind("ashlands", "Ashlands", "DvergerAshlands", 200, ("Blackwood", 10), ("Grausten", 5)),
-            new PostKind("deepnorth", "Deep North", "DvergerDeepNorth", 400, ("Frostwood", 10), ("NornThread", 5)),
+            new PostKind("rogue", "rogue", "a rogue", "Dverger", 100, Mistlands),
+            new PostKind("firemage", "fire mage", "a fire mage", "DvergerMageFire", 100, Mistlands),
+            new PostKind("icemage", "ice mage", "an ice mage", "DvergerMageIce", 100, Mistlands),
+            new PostKind("supportmage", "support mage", "a support mage", "DvergerMageSupport", 100, Mistlands),
+            new PostKind("ashlands", "Ashlands", "an Ashlands Dvergr", "DvergerAshlands", 200, ("Blackwood", 10), ("Grausten", 5)),
+            new PostKind("deepnorth", "Deep North", "a Deep North Dvergr", "DvergerDeepNorth", 400, ("Frostwood", 10), ("NornThread", 5)),
         };
 
         public static PostKind ById(string id) => Kinds.FirstOrDefault(k => k.Id == id);

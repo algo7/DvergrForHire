@@ -49,9 +49,10 @@ namespace DvergrForHire
 
         public static string RecruiterName(string label) => char.ToUpperInvariant(label[0]) + label.Substring(1) + " recruiter";
 
+        /// <param name="one">What the post hires, as in "Hire a rogue" (PostKind.One).</param>
         /// <param name="vanilla">Tameable.GetHoverText's text; its rename line(s) are kept (keyboard or gamepad key).</param>
-        public static string RecruiterHover(string label, int price, string vanilla) =>
-            RecruiterName(label) + "\n" + HireRules.UseLine("Hire: " + price.ToString(CultureInfo.InvariantCulture) + " coins")
+        public static string RecruiterHover(string label, string one, int price, string vanilla) =>
+            RecruiterName(label) + "\n" + HireRules.UseLine("Hire " + one + ": " + price.ToString(CultureInfo.InvariantCulture) + " coins")
             + HireRules.RenameLines(vanilla);
 
         /// <summary>

@@ -65,9 +65,12 @@ internal static partial class Tests
         Eq("Fire mage recruiter", PostRules.RecruiterName("fire mage"), "capitalised");
         Eq("Deep North recruiter", PostRules.RecruiterName("Deep North"), "names keep their capitals");
         var vanilla = "Dvergr mage ( Tame, Hungry )\n[<color=yellow><b>E</b></color>] Pet\n[<color=yellow><b>L-Shift + E</b></color>] Rename";
-        Eq("Ice mage recruiter\n" + KeyUse + "Hire: 150 coins\n[<color=yellow><b>L-Shift + E</b></color>] Rename",
-            PostRules.RecruiterHover("ice mage", 150, vanilla), "hire line ours, rename line vanilla's");
-        Eq("Rogue recruiter\n" + KeyUse + "Hire: 100 coins", PostRules.RecruiterHover("rogue", 100, null), "no vanilla text");
+        // User, 2026-10-06: the E line says what you get ("[E] Hire: 120 coins" could read as hiring the recruiter himself).
+        Eq("Ice mage recruiter\n" + KeyUse + "Hire an ice mage: 150 coins\n[<color=yellow><b>L-Shift + E</b></color>] Rename",
+            PostRules.RecruiterHover("ice mage", "an ice mage", 150, vanilla), "hire line ours, rename line vanilla's");
+        Eq("Rogue recruiter\n" + KeyUse + "Hire a rogue: 100 coins", PostRules.RecruiterHover("rogue", "a rogue", 100, null), "no vanilla text");
+        Eq("a rogue,a fire mage,an ice mage,a support mage,an Ashlands Dvergr,a Deep North Dvergr",
+            string.Join(",", PostSettings.Kinds.Select(k => k.One)), "what each post hires, as in \"Hire a rogue\"");
     }
 
     private static void Test_Posts_RecruiterE()
