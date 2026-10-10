@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1
+
+- Added Hexium release workflows.
+
 ## 1.0.0
 
 - First release: hire the game's own Dvergr with coins (Mistlands 100, Ashlands 200, Deep North 100; starred ones
