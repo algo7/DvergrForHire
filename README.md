@@ -109,8 +109,9 @@ The Makefile looks for the SDK in `~/.dotnet`; pass `DOTNET=dotnet` if it's on y
   ([MinVer](https://github.com/adamralph/minver)). To release:
   1. add a `## X.Y.Z` section to [CHANGELOG.md](CHANGELOG.md), above the previous release's section, and push it;
   2. tag that commit: `git tag vX.Y.Z && git push origin vX.Y.Z`;
-  3. approve the run in the `thunderstore` environment: it creates the GitHub Release and publishes the same zip to
-     Thunderstore (`tcli`, secret `TCLI_AUTH_TOKEN`).
+  3. approve the run in the `release` environment: it creates the GitHub Release, then publishes the same zip to
+     Thunderstore and Hexium in parallel (`tcli`, secrets `TCLI_AUTH_TOKEN` and `HEXIUM_AUTH_TOKEN` in the
+     `mod-databases` environment).
 - **Dependabot**: NuGet packages and GitHub Actions, weekly.
 
 ## Layout
