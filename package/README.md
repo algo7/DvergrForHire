@@ -116,6 +116,8 @@ lantern poles with a friendly Dvergr next to them. Reinstalling picks up where y
 
 ## Links
 
+- Available on [Thunderstore](https://thunderstore.io/c/valheim/p/Algo7/DvergrForHire/) and
+  [Hexium](https://valheim.hexium.gg/mods/Algo7/DvergrForHire)
 - Source and bug reports: https://github.com/algo7/DvergrForHire (issues welcome)
 - Changes: the Changelog tab
 - Made with AI assistance.

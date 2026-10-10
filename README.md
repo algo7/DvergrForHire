@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/algo7/DvergrForHire/actions/workflows/ci.yml/badge.svg)](https://github.com/algo7/DvergrForHire/actions/workflows/ci.yml)
 [![Thunderstore](https://img.shields.io/badge/Thunderstore-DvergrForHire-blue)](https://thunderstore.io/c/valheim/p/Algo7/DvergrForHire/)
+[![Hexium](https://img.shields.io/badge/Hexium-DvergrForHire-purple)](https://valheim.hexium.gg/mods/Algo7/DvergrForHire)
 
 ![Hired Dvergr fighting a Seeker inside a palisade pen](images/header.jpg)
 
