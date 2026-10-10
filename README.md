@@ -9,8 +9,8 @@
 A client-side [BepInEx](https://github.com/BepInEx/BepInEx) mod for Valheim: hire the game's own Dvergr with coins as
 mercenaries. Players without the mod only ever see vanilla things.
 
-What it does for players is in [package/README.md](package/README.md), which is also the mod's Thunderstore page.
-Changes: [CHANGELOG.md](CHANGELOG.md).
+What it does for players is in [package/README.md](package/README.md), which is also the mod's Thunderstore and
+Hexium page. Changes: [CHANGELOG.md](CHANGELOG.md).
 
 Made with AI assistance.
 
@@ -120,10 +120,11 @@ The Makefile looks for the SDK in `~/.dotnet`; pass `DOTNET=dotnet` if it's on y
 ```
 DvergrForHire.csproj       net48 plugin; Package target (zip + generated manifest)
 src/                       plugin: scene hook, prefab setup, Mercenary (+ recruiter mode), hiring posts, Harmony patches, settings and rules
-package/                   Thunderstore README and icon (icon.svg is its source)
+package/                   mod page (Thunderstore and Hexium) and icon (icon.svg is its source)
 images/                    screenshots for the READMEs (not in the zip)
 tests/                     unit tests (net8.0)
 thunderstore.toml          Thunderstore publishing settings (tcli)
+hexium.toml                Hexium publishing settings (tcli)
 .github/                   workflows, Dependabot, the CI helper that fetches the game DLLs
 ```
 
